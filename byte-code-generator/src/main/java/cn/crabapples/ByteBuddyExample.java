@@ -31,8 +31,9 @@ public class ByteBuddyExample {
 
         // 创建实例并调用方法
         Object instance = dynamicType.getDeclaredConstructor().newInstance();
-        System.out.println(dynamicType.getMethod("method1").invoke(instance));
-        System.out.println(dynamicType.getMethod("method2").invoke(instance));
+        System.err.println(instance);
+//        System.out.println(dynamicType.getMethod("method1").invoke(instance));
+//        System.out.println(dynamicType.getMethod("method2").invoke(instance));
 
         // 打印方法注解
 //        System.out.println(dynamicType.getMethod("method1").getAnnotation(MyAnnotation1.class).value());
