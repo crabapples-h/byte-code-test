@@ -1,8 +1,7 @@
-package cn.crabapples.generator;
+package cn.crabapples;
 
+import cn.crabapples.common.BaseController;
 import cn.crabapples.common.ResponseDTO;
-import cn.crabapples.common.base.BaseController;
-import cn.crabapples.common.jwt.JwtIgnore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +28,7 @@ public class ControllerTemplate extends BaseController {
 //
     @GetMapping("/list")
     @JwtIgnore
-    public ResponseDTO<List> list() {
+    public ResponseDTO<List<ResponseDTO<Object>>> list() {
         return new ResponseDTO<>();
 
     }
