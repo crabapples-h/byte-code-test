@@ -10,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,8 +48,8 @@ import org.springframework.web.client.RestTemplate;
 //        @MapperScan("cn.crabapples.custom.dao"),
         @MapperScan("cn.crabapples.system.*.dao.mybatis.mapper"),
 //        @MapperScan("cn.crabapples.custom.*.dao.mybatis.mapper")
-
 })
+@ComponentScan(basePackages = {"cn.crabapples"})
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 

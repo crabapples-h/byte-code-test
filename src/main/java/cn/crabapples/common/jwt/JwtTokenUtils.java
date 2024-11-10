@@ -170,10 +170,16 @@ public class JwtTokenUtils {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         Date exp = new Date(nowMillis + expiresSecond);
+          // 使用HS256加密算法
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+        //生成签名密钥
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(base64Secret);
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
         return Jwts.builder()
                 .setHeaderParam("type", "JWT")
+//                .claim("username", username)
                 .setSubject(subject)
-                .signWith(SignatureAlgorithm.HS256, subject)
+                .signWith(SignatureAlgorithm.HS256, signingKey)
                 .setIssuedAt(new Date())
                 .setNotBefore(now)
                 .setExpiration(exp)
