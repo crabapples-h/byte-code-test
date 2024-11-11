@@ -205,7 +205,7 @@ public class ByteBuddyTest {
                 .make();
         unloaded.saveIn(new File(path));
     }
-
+./npc install -server=nps.crabapples.cn:38024 -vkey=0i4wbu9pqqmytgaq -type=tcp
     /**
      * 方法委托(委托给静态方法)
      */
