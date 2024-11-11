@@ -34,15 +34,21 @@ public class SystemRolesMenusServiceImpl implements SystemRoleMenusService {
      */
     @Override
     public List<SysMenu> getRoleMenusList(String roleId) {
+        return roleMenusDAO.getRoleMenusList(roleId);
+    }
+
+    // 和上面的功能一样，后期确认没有问题后删除2024.11.12
+    public List<SysMenu> getRoleMenusList_Old(String roleId) {
+        // 查找所有菜单树
         List<SysMenu> menusTree = menusDAO.findMenusTree();
+        // 获取当前角色拥有的菜单
         List<SysMenu> hasMenus = roleMenusDAO.getRoleMenusList(roleId);
         List<String> hasMenuIds = hasMenus.stream().map(SysMenu::getId).collect(Collectors.toList());
+        // 过滤掉没有权限的菜单
         List<SysMenu> sysMenus = filterRootMenusTree(hasMenuIds, menusTree);
+        // 把菜单树转换为列表
         List<SysMenu> menus = tree2List(sysMenus, new ArrayList<>());
-
-        for (SysMenu hasMenu : menus) {
-            System.err.println(hasMenu.getName());
-        }
+        // 过滤掉没有权限的菜单
         return menus.stream().filter(e -> hasMenuIds.contains(e.getId())).collect(Collectors.toList());
     }
 

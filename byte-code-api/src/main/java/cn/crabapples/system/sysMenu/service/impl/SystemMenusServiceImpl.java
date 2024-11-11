@@ -83,7 +83,7 @@ public class SystemMenusServiceImpl implements SystemMenusService {
     public boolean saveMenus(MenusForm form) {
         if (!StringUtils.isEmpty(form.getPid())) {
             // 当添加子菜单时，将其父级菜单从已拥有的权限中移除，避免角色直接拥有新添加的菜单的权限
-//            roleMenusService.delByMenuId(form.getPid());
+            roleMenusService.delByMenuId(form.getPid());
         }
         return systemMenusDAO.saveOrUpdate(form.toEntity());
     }
