@@ -88,7 +88,7 @@ public class SystemRoleController extends BaseController {
         log.info("收到请求->保存角色:[{}]", form);
         rolesService.saveRoles(form);
         log.info("返回结果->保存角色成功");
-        return new ResponseDTO<>();
+        return new ResponseDTO<>().returnSuccess("保存成功");
     }
 
     /**
@@ -99,7 +99,7 @@ public class SystemRoleController extends BaseController {
         log.info("收到请求->删除角色:[{}]", id);
         rolesService.removeRoles(id);
         log.info("返回结果->删除角色成功");
-        return new ResponseDTO<>();
+        return new ResponseDTO<>().returnSuccess("删除成功");
     }
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
  * pc-name mrhe
  */
 @Component
-public class MenusDAO extends ServiceImpl<MenusMapper, SysMenu> {
+public class SystemMenusDAO extends ServiceImpl<MenusMapper, SysMenu> {
 
     public boolean remove(String id) {
         return removeById(id);

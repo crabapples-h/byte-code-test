@@ -4,8 +4,11 @@ import cn.crabapples.common.ApplicationException;
 import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.utils.AssertUtils;
 import cn.crabapples.system.dto.SysUserDTO;
+import cn.crabapples.system.sysMenu.dao.SystemMenusDAO;
 import cn.crabapples.system.sysUser.dao.UserDAO;
 import cn.crabapples.system.sysUser.entity.SysUser;
+import cn.crabapples.system.sysUser.form.ResetPasswordForm;
+import cn.crabapples.system.sysUser.form.UpdatePasswordForm;
 import cn.crabapples.system.sysUser.form.UserForm;
 import cn.crabapples.system.sysUser.service.SystemUserService;
 import cn.crabapples.system.sysUserRole.service.SystemUserRoleService;
@@ -141,7 +144,7 @@ public class SystemUserServiceImpl implements SystemUserService {
      * 修改密码
      */
     @Override
-    public boolean updatePassword(UserForm.UpdatePassword form) {
+    public boolean updatePassword(UpdatePasswordForm form) {
         SysUser user = checkPassword(form);
         String password = form.getOldPassword();
         String newPassword = form.getNewPassword();
@@ -158,7 +161,7 @@ public class SystemUserServiceImpl implements SystemUserService {
      * 重置密码
      */
     @Override
-    public boolean resetPassword(UserForm.ResetPassword form) {
+    public boolean resetPassword(ResetPasswordForm form) {
         SysUser user = checkPassword(form);
         String newPassword = form.getNewPassword();
         AssertUtils.notNull(user, "用户不存在");
@@ -192,7 +195,7 @@ public class SystemUserServiceImpl implements SystemUserService {
      * 1、检测两次输入密码是否相同
      * 2、检测用户是否存在
      */
-    private SysUser checkPassword(UserForm.ResetPassword form) {
+    private SysUser checkPassword(ResetPasswordForm form) {
         String newPassword = form.getNewPassword();
         String againPassword = form.getAgainPassword();
         if (!newPassword.equals(againPassword)) {
