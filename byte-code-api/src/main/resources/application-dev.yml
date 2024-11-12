@@ -17,6 +17,7 @@ spring:
   #----- database base config -----
   datasource.druid.driverClassName: 'com.mysql.cj.jdbc.Driver'
   datasource.druid.url: jdbc:mysql://127.0.0.1:3306/learn?useSSL=false&${dataBaseParam}
+#  datasource.druid.url: jdbc:mysql://127.0.0.1:3306/learn
   datasource.druid.username: root
   datasource.druid.password: root
   #----- database more config -----
