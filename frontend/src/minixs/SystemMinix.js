@@ -21,7 +21,6 @@ export default {
                 list: ''
             },
             form: {},
-            title: '标题',
             spinning: false,
             queryParam: {},
         }

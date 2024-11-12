@@ -7,7 +7,7 @@
 </template>
 <script>
 import storage from '@/store/storage'
-import { whiteList } from '@/router'
+import {whiteList} from '@/router'
 
 export default {
   name: 'App',
@@ -64,7 +64,9 @@ export default {
 
 <style>
 #app {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
 }
 </style>

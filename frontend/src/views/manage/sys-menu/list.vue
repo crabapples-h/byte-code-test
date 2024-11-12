@@ -1,17 +1,27 @@
 <template>
   <div>
-    <a-button @click="showAdd()" v-auth:sys:menus:add>添加菜单</a-button>
+    <a-form layout="inline" @keyup.enter.native="getList">
+      <a-space>
+        <a-form-item label="菜单">
+          <a-input placeholder="请输入菜单" v-model="queryParam.name" :allow-clear="true"/>
+        </a-form-item>
+        <a-button type="default" @click="getList" icon="search">查询</a-button>
+        <a-button type="default" @click="resetSearch" icon="reload">重置</a-button>
+        <a-button type="primary" @click="showAdd" icon="plus" v-auth:sys:menus:add ghost>添加</a-button>
+      </a-space>
+    </a-form>
     <a-divider/>
-    <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination" :scroll="{ x: 1200}">
+    <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination"
+             :scroll="{y:600}">
       <span slot="action" slot-scope="text, record">
+        <a-space>
         <c-pop-button title="确定要删除吗" text="删除" type="danger" @click="remove(record)" v-auth:sys:menus:del/>
-        <a-divider type="vertical"/>
         <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:menus:edit>编辑</a-button>
         <span v-if="record.menusType === 1">
-          <a-divider type="vertical"/>
           <a-button type="primary" size="small" @click="showAddChild(record)"
                     v-auth:sys:menus:add-children>添加子菜单</a-button>
         </span>
+        </a-space>
       </span>
       <span slot="icon" slot-scope="text, record">
         <a-icon :type='text.substring(text.indexOf("\"") + 1,text.lastIndexOf("\"")) || "appstore"'/>

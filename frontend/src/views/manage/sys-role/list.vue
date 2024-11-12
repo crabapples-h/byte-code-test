@@ -1,17 +1,26 @@
 <template>
   <div>
-    <a-button @click="showAdd" v-auth:sys:roles:add>添加角色</a-button>
+    <a-form layout="inline" @keyup.enter.native="getList">
+      <a-space>
+        <a-form-item label="角色">
+          <a-input placeholder="请输入角色" v-model="queryParam.name" :allow-clear="true"/>
+        </a-form-item>
+        <a-button type="default" @click="getList" icon="search">查询</a-button>
+        <a-button type="default" @click="resetSearch" icon="reload">重置</a-button>
+        <a-button type="primary" @click="showAdd" icon="plus" v-auth:sys:roles:add ghost>添加</a-button>
+      </a-space>
+    </a-form>
     <a-divider/>
     <add-role :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addMenu" :title="title"/>
     <role-detail :visible="show.detail" @cancel="closeDetail" :role-id="detailId" ref="detail"/>
     <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination">
         <span slot="action" slot-scope="text, record">
+        <a-space>
         <c-pop-button title="确定要删除吗" text="删除" type="danger" size="small" @click="remove(record)"
                       v-auth:sys:roles:del/>
-        <a-divider type="vertical" v-auth:sys:roles:del/>
         <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:roles:edit>编辑</a-button>
-        <a-divider type="vertical" v-auth:sys:roles:edit/>
         <a-button type="primary" size="small" @click="showDetail(record)">查看菜单</a-button>
+        </a-space>
       </span>
     </a-table>
   </div>
@@ -53,7 +62,8 @@ export default {
         list: SysApis.rolePage,
         delete: SysApis.delRoles,
       },
-      detailId: ''
+      detailId: '',
+      title: '标题',
     }
   },
   activated() {

@@ -9,15 +9,6 @@
         <a-input v-model="form.name"/>
       </a-form-model-item>
       <a-form-model-item label="菜单">
-        <a-tree-select
-          :tree-data="menusOptions"
-          v-model="form.hasMenusIds"
-          tree-checkable
-          :show-checked-strategy="SHOW_TYPE"
-          :show-line="show.treeLine"
-          :checkStrictly="false"
-          :replace-fields="replaceFields"
-          v-if="false"/>
         <a-tree
           v-model="form.menuList"
           :checkable="true"

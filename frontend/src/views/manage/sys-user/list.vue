@@ -1,33 +1,25 @@
 <template>
   <div>
     <a-form layout="inline" @keyup.enter.native="getList">
-      <a-row class="query-form">
-        <a-col>
-          <a-form-item label="用户名">
-            <a-input placeholder="请输入用户名" v-model="queryParam.username" :allow-clear="true"/>
-          </a-form-item>
-           <a-form-item label="姓名">
-            <a-input placeholder="请输入姓名" v-model="queryParam.name" :allow-clear="true"/>
-          </a-form-item>
-           <a-form-item label="手机号">
-            <a-input placeholder="请输入手机号" v-model="queryParam.phone" :allow-clear="true"/>
-          </a-form-item>
-        </a-col>
-        <a-col :md="8" :sm="8">
-              <span style="float: left; overflow: hidden" class="table-page-search-submitButtons">
-                <a-button type="primary" @click="getList" icon="search">查询</a-button>
-                <a-button type="default" @click="resetSearch" icon="reload" style="margin-left: 8px">重置</a-button>
-                <a-button type="primary" @click="showAdd" icon="plus" v-auth:sys:user:add
-                          style="margin-left: 8px">添加</a-button>
-              </span>
-        </a-col>
-      </a-row>
+      <a-space>
+        <a-form-item label="用户名">
+          <a-input placeholder="请输入用户名" v-model="queryParam.username" :allow-clear="true"/>
+        </a-form-item>
+        <a-form-item label="姓名">
+          <a-input placeholder="请输入姓名" v-model="queryParam.name" :allow-clear="true"/>
+        </a-form-item>
+        <a-form-item label="手机号">
+          <a-input placeholder="请输入手机号" v-model="queryParam.phone" :allow-clear="true"/>
+        </a-form-item>
+        <a-button type="default" @click="getList" icon="search">查询</a-button>
+        <a-button type="default" @click="resetSearch" icon="reload">重置</a-button>
+        <a-button type="primary" @click="showAdd" icon="plus" v-auth:sys:user:add ghost>添加</a-button>
+      </a-space>
     </a-form>
     <a-divider/>
     <add-user :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addUser"/>
     <change-password :visible="show.changePassword" @cancel="closeChangePasswordForm" :user-id="userId"
                      ref="changePassword"/>
-
 
     <a-table :data-source="dataSource" bordered
              rowKey="id"
@@ -39,18 +31,17 @@
         <a-tag color="red" v-else>锁定</a-tag>
       </template>
       <template #action="value,record">
-        <template v-if="record.username !== 'admin'">
-          <c-pop-button title="确认要锁定吗" text="锁定" @click="lockUser(record)" type="primary"
-                        v-if="record.status === 0" v-auth:sys:user:lock/>
-          <c-pop-button title="确认要解锁吗" text="解锁" @click="unlockUser(record)"
-                        v-if="record.status === 1" v-auth:sys:user:unlock/>
-          <a-divider type="vertical"/>
-          <c-pop-button title="确认要删除吗" text="删除" @click="remove(record)" type="danger" v-auth:sys:user:del/>
-          <a-divider type="vertical"/>
-          <a-button @click="showChangePassword(record)" size="small" v-auth:sys:user:resetpwd>修改密码</a-button>
-          <a-button @click="showChangePassword(record)" v-auth:sys:user:change-password>修改密码</a-button>
-        </template>
-        <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:user:edit>编辑</a-button>
+        <a-space>
+          <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:user:edit>编辑</a-button>
+          <template v-if="record.username !== 'admin'">
+            <c-pop-button title="确认要锁定吗" text="锁定" @click="lockUser(record)" type="danger" :ghost="true"
+                          v-if="record.status === 0" v-auth:sys:user:lock/>
+            <c-pop-button title="确认要解锁吗" text="解锁" @click="unlockUser(record)"
+                          v-if="record.status === 1" v-auth:sys:user:unlock/>
+            <c-pop-button title="确认要删除吗" text="删除" @click="remove(record)" type="danger" v-auth:sys:user:del/>
+            <a-button @click="showChangePassword(record)" v-auth:sys:user:change-password>重置密码</a-button>
+          </template>
+        </a-space>
       </template>
     </a-table>
   </div>
@@ -120,7 +111,7 @@ export default {
           key: 'status',
           scopedSlots: {customRender: 'status'},
           align: 'center',
-          width: 200
+          width: 80
         },
         {
           title: '操作',
