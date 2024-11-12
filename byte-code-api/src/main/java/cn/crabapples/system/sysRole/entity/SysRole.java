@@ -3,7 +3,7 @@ package cn.crabapples.system.sysRole.entity;
 import cn.crabapples.common.base.BaseEntity;
 import cn.crabapples.common.dic.Dict;
 import cn.crabapples.system.sysMenu.entity.SysMenu;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

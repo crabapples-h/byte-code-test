@@ -15,7 +15,7 @@ public class UserRolesDAO {
 
     public void saveUserRoles(String userId, List<String> roleList) {
         mapper.deleteUserRoles(userId);
-        if (!roleList.isEmpty()) {
+        if (roleList != null && !roleList.isEmpty()) {
             roleList.forEach(e -> mapper.saveUserRoles(userId, e));
         }
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form layout="inline" @keyup.enter.native="getList">
-      <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <a-form-item label="角色">
           <a-input placeholder="请输入角色" v-model="queryParam.name" :allow-clear="true"/>
         </a-form-item>
@@ -11,11 +11,12 @@
       </a-space>
     </a-form>
     <a-divider/>
-    <add-role :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addMenu" :title="title"/>
+    <add-role :visible="show.add" @cancel="closeForm" title="添加"/>
+    <add-role :visible="show.edit" @cancel="closeForm" :is-edit="show.edit" ref="editForm" title="编辑"/>
     <role-detail :visible="show.detail" @cancel="closeDetail" :role-id="detailId" ref="detail"/>
     <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination" bordered>
         <span slot="action" slot-scope="text, record">
-        <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <c-pop-button title="确定要删除吗" text="删除" type="danger" size="small" @click="remove(record)"
                       v-auth:sys:roles:del/>
         <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:roles:edit>编辑</a-button>
@@ -71,30 +72,17 @@ export default {
   mounted() {
   },
   methods: {
-    showAdd() {
-      this.show.add = true
-      this.title = '添加'
-    },
+
     closeForm() {
       this.show.add = false
       this.show.edit = false
       this.refreshData()
       commonApi.refreshSysData()
     },
-    showEdit(e) {
-      this.$refs.addMenu.form = e
-      this.show.add = true
-      this.show.edit = true
-      this.title = '编辑'
-    },
     showDetail(e) {
       this.detailId = e.id
       this.show.detail = true
     },
-    closeDetail() {
-      this.show.detail = false
-    },
-
   }
 }
 </script>

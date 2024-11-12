@@ -3,7 +3,7 @@ package cn.crabapples.system.sysUser.form;
 import cn.crabapples.common.Groups;
 import cn.crabapples.common.base.BaseForm;
 import cn.crabapples.system.sysUser.entity.SysUser;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -55,6 +55,9 @@ public class UserForm extends BaseForm<SysUser> {
     @Length(max = 16)
     @NotBlank(message = "姓名不能为空", groups = {Groups.IsNotNull.class, Groups.IsAdd.class, Groups.IsEdit.class})
     private String name;
+
+    @NotNull(message = "性别不能为空", groups = {Groups.IsNotNull.class, Groups.IsAdd.class, Groups.IsEdit.class})
+    private Integer gender;
 
     @Length(max = 32)
     @NotBlank(message = "邮箱不能为空", groups = {Groups.IsNotNull.class, Groups.IsAdd.class, Groups.IsEdit.class})

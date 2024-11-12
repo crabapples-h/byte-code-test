@@ -4,7 +4,7 @@ import cn.crabapples.common.base.BaseEntity;
 import cn.crabapples.common.utils.ReflectUtils;
 import cn.crabapples.system.sysDict.entity.SysDictItem;
 import cn.crabapples.system.sysDict.service.SystemDictService;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +59,14 @@ public enum DictEnum {
      */
     public Object fillDictText(RedisTemplate<String, Map<String, String>> redisTemplate,
                                SystemDictService dictService, Object data) {
+        if (data instanceof IPage) {
+            System.err.println("分页数据开始翻译");
+        } else if (data instanceof List) {
+            System.err.println("列表数据开始翻译");
+        } else if (data instanceof BaseEntity) {
+            System.err.println("单个对象开始翻译");
+        }
+
         List<?> dataList = null;
         Class<?> clazz = Object.class;
         switch (this) {
@@ -77,7 +85,7 @@ public enum DictEnum {
             }
         }
         // 判断是否是集合类型
-        if (null != dataList && dataList.size() > 0) {
+        if (null != dataList && !dataList.isEmpty()) {
             clazz = dataList.get(0).getClass();
         }
         // 如果是集合类型，则遍历集合并填充数据
@@ -112,7 +120,7 @@ public enum DictEnum {
             try {
                 if (field.getAnnotation(Dict.class) != null) {
                     String code = field.getAnnotation(Dict.class).dictCode();
-                    String text = field.getAnnotation(Dict.class).dictText();
+                    String text = field.getAnnotation(Dict.class).dictField();
                     String table = field.getAnnotation(Dict.class).dictTable();
                     String dictCode = code;
                     if (!StringUtils.isEmpty(table)) {

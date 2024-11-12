@@ -1,7 +1,7 @@
 <template>
   <a-modal :visible="visible" width="50%" ok-text="确认" cancel-text="取消" @ok="submit"
            @cancel="closeForm">
-    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="menuForm">
+    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
       <a-form-model-item label="ID" style="display: none">
         <a-input v-model="form.id" disabled placeholder="新建时自动生成"/>
       </a-form-model-item>
@@ -66,7 +66,7 @@ export default {
       type: Boolean,
       default: false
     },
-    cancel: {
+    close: {
       type: Function,
     }
   },
@@ -103,24 +103,6 @@ export default {
   mounted() {
   },
   methods: {
-    closeForm() {
-      this.$emit('cancel')
-    },
-    submit() {
-      this.$refs.menuForm.validate(valid => {
-        if (valid) {
-          this.$http.post(this.url.save, this.form).then(result => {
-            if (result.status !== 200) {
-              this.$message.error(result.message)
-            }
-          }).catch(function (error) {
-            console.error('出现错误:', error)
-          }).finally(() => {
-            this.closeForm()
-          })
-        }
-      })
-    },
   }
 }
 </script>

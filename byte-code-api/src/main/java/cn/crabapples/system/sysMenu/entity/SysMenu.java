@@ -1,7 +1,7 @@
 package cn.crabapples.system.sysMenu.entity;
 
 import cn.crabapples.common.base.BaseEntity;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
 import lombok.experimental.Accessors;

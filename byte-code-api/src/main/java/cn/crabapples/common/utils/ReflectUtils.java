@@ -13,7 +13,7 @@ public class ReflectUtils {
     public static Field[] getAllFields(Class clazz) {
         Field[] superFields = null;
         // 获取class的父类
-        Class superclass = clazz.getSuperclass();
+        Class<?> superclass = clazz.getSuperclass();
         if (Object.class != superclass) {
             // 当父类不是Object时获取父类class的属性
             superFields = getAllFields(superclass);

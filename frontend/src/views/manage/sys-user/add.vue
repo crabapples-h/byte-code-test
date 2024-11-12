@@ -1,26 +1,32 @@
 <template>
-  <a-drawer title="添加用户" width="30%" :visible="visible" @close="closeForm">
-    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="userForm">
+  <a-drawer :title="title" width="30%" :visible="visible" @close="closeForm">
+    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
       <a-form-model-item label="id" prop="id" style="display: none">
-        <a-input v-model="form.id" disabled placeholder="新建时自动生成" />
+        <a-input v-model="form.id" disabled placeholder="新建时自动生成"/>
       </a-form-model-item>
       <a-form-model-item label="用户名" prop="username">
-        <a-input v-model="form.username" :disabled="isEdit" placeholder="请输入用户名" />
+        <a-input v-model="form.username" :disabled="isEdit" placeholder="请输入用户名"/>
       </a-form-model-item>
       <a-form-model-item label="姓名" prop="name">
-        <a-input v-model="form.name" placeholder="请输入姓名" />
+        <a-input v-model="form.name" placeholder="请输入姓名"/>
+      </a-form-model-item>
+      <a-form-model-item label="性别" prop="gender">
+        <a-radio-group v-model="form.gender">
+          <a-radio :value="1">男</a-radio>
+          <a-radio :value="0">女</a-radio>
+        </a-radio-group>
       </a-form-model-item>
       <a-form-model-item label="年龄" prop="age">
-        <a-input-number v-model="form.age" placeholder="请输入年龄" />
+        <a-input-number v-model="form.age" placeholder="请输入年龄"/>
       </a-form-model-item>
       <a-form-model-item label="邮箱" prop="mail">
-        <a-input v-model="form.mail" placeholder="请输入邮箱" />
+        <a-input v-model="form.mail" placeholder="请输入邮箱"/>
       </a-form-model-item>
       <a-form-model-item label="电话" prop="phone">
-        <a-input v-model="form.phone" placeholder="请输入电话号码" />
+        <a-input v-model="form.phone" placeholder="请输入电话号码"/>
       </a-form-model-item>
       <a-form-model-item label="角色">
-        <a-select mode="multiple" v-model="form.roleList" placeholder="请选择角色" :options="roleOptions" />
+        <a-select mode="multiple" v-model="form.roleList" placeholder="请选择角色" :options="roleOptions"/>
       </a-form-model-item>
     </a-form-model>
     <div class="drawer-bottom-button">
@@ -32,7 +38,7 @@
 
 <script>
 
-import { SysApis } from '@/api/Apis'
+import {SysApis} from '@/api/Apis'
 import SystemMinix from '@/minixs/SystemMinix'
 
 export default {
@@ -43,7 +49,10 @@ export default {
       type: Boolean,
       default: false
     },
-    cancel: {
+    title: {
+      type: String,
+    },
+    close: {
       type: Function
     },
     isEdit: {
@@ -52,8 +61,8 @@ export default {
     }
   },
   watch: {
-    props(nowValue, oldValue) {
-      if (nowValue) {
+    visible(nowValue, oldValue) {
+      if (nowValue && this.isEdit) {
         this.loadUserRoles()
       }
     }
@@ -62,27 +71,31 @@ export default {
     return {
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'change' },
-          { min: 2, max: 16, message: '长度为2-16个字符', trigger: 'change' },
-          { whitespace: true, message: '请输入用户名', trigger: 'change' },
-          { validator: this.isEdit ? null : this.checkUsername, message: '用户名已经存在', trigger: 'change' }
+          {required: true, message: '请输入用户名', trigger: 'change'},
+          {min: 2, max: 16, message: '长度为2-16个字符', trigger: 'change'},
+          {whitespace: true, message: '请输入用户名', trigger: 'change'},
+          {validator: this.checkChineseChar, message: '用户名不能包含中文', trigger: 'change'},
+          {validator: this.checkUsername, message: '用户名已经存在', trigger: 'change'},
         ],
         name: [
-          { required: true, message: '请输入名称', trigger: 'change' },
-          { min: 2, max: 16, message: '长度为2-16个字符', trigger: 'change' },
-          { whitespace: true, message: '请输入名称', trigger: 'change' }
+          {required: true, message: '请输入名称', trigger: 'change'},
+          {min: 2, max: 16, message: '长度为2-16个字符', trigger: 'change'},
+          {whitespace: true, message: '请输入名称', trigger: 'change'}
         ],
         age: [
-          { required: true, message: '请输入年龄', trigger: 'change' }
+          {required: true, message: '请输入年龄', trigger: 'change'}
+        ],
+        gender: [
+          {required: true, message: '请选择性别', trigger: 'change'}
         ],
         mail: [
-          { required: true, message: '请输入邮箱', trigger: 'change' },
-          { whitespace: true, message: '请输入邮箱', trigger: 'change' }
+          {required: true, message: '请输入邮箱', trigger: 'change'},
+          {whitespace: true, message: '请输入邮箱', trigger: 'change'}
         ],
         phone: [
-          { required: true, message: '请输入电话', trigger: 'change' },
-          { whitespace: true, message: '请输入电话', trigger: 'change' },
-          { min: 8, max: 16, message: '长度为8-16个字符', trigger: 'change' }
+          {required: true, message: '请输入电话', trigger: 'change'},
+          {whitespace: true, message: '请输入电话', trigger: 'change'},
+          {min: 11, max: 11, message: '长度为11个字符', trigger: 'change'}
         ]
       },
       columns: [
@@ -121,12 +134,12 @@ export default {
           dataIndex: 'status',
           title: '状态',
           key: 'status',
-          scopedSlots: { customRender: 'status' }
+          scopedSlots: {customRender: 'status'}
         },
         {
           title: '操作',
           key: 'action',
-          scopedSlots: { customRender: 'action' }
+          scopedSlots: {customRender: 'action'}
         }
       ],
       roleOptions: [],
@@ -151,9 +164,9 @@ export default {
           return
         }
         this.roleOptions = result.data.map(e => {
-          return { label: e.name, value: e.id }
+          return {label: e.name, value: e.id}
         })
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.error('出现错误:', error)
       })
     },
@@ -166,30 +179,16 @@ export default {
         this.$set(this.form, 'roleList', result.data.map(r => {
           return r.id
         }))
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.error('出现错误:', error)
       })
     },
-    closeForm() {
-      this.form = {
-        roleList: []
+    checkChineseChar(rule, value, callback) {
+      if (new RegExp(/[\u4E00-\u9FA5]/g).test(value)) {
+        callback(new Error('用户名不能包含中文'))
+        return
       }
-      this.$emit('cancel')
-    },
-    submit() {
-      this.$refs.userForm.validate(valid => {
-        if (valid) {
-          this.$http.post(this.url.save, this.form).then(result => {
-            if (result.status !== 200) {
-              this.$message.error(result.message)
-            }
-          }).catch(function(error) {
-            console.error('出现错误:', error)
-          }).finally(() => {
-            this.closeForm()
-          })
-        }
-      })
+      callback()
     },
     checkUsername(rule, value, callback) {
       if (this.isEdit) {
@@ -201,7 +200,7 @@ export default {
           } else {
             callback()
           }
-        }).catch(function(error) {
+        }).catch(function (error) {
           console.error('出现错误:', error)
         })
       }

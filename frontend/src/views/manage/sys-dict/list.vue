@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form layout="inline" @keyup.enter.native="getList">
-      <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <a-form-item label="名称">
           <a-input placeholder="请输入字典名称" v-model="queryParam.name" :allow-clear="true"/>
         </a-form-item>
@@ -12,12 +12,13 @@
     </a-form>
     <a-divider/>
     <dict-detail :visible="show.detail" :dict-code="dictCode" @cancel="closeDetail"/>
-    <add-dict :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="AddDict"/>
+    <add-dict :visible="show.add" @close="closeAdd"/>
+    <add-dict :visible="show.edit" @close="closeEdit" :is-edit="true" ref="editForm"/>
     <add-dict-item :visible="show.addItem" :dict-code="dictCode" @cancel="closeItemForm"/>
     <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination"
-             :scroll="{x:true}" bordered>
+             bordered>
       <span slot="action" slot-scope="text, record">
-        <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <c-pop-button title="确定要删除吗" text="删除" type="danger" @click="remove(record)"/>
         <a-button type="primary" size="small" @click="showEdit(record)">编辑</a-button>
         <a-button type="primary" size="small" @click="showAddItem(record)">添加字典项</a-button>
@@ -25,7 +26,7 @@
           </a-space>
       </span>
       <span slot="icon" slot-scope="text, record">
-        <a-icon :type='text.substring(text.indexOf("\"") + 1,text.lastIndexOf("\"")) || "appstore"'/>
+        <a-icon :type='iconHandler(text)'/>
       </span>
     </a-table>
   </div>
@@ -62,18 +63,11 @@ export default {
           dataIndex: 'action',
           title: '操作',
           scopedSlots: {customRender: 'action'},
-          width: 200
         },
       ],
-      dataSource: [],
-      show: {
-        add: false,
-        edit: false,
-        detail: false,
-      },
       url: {
         list: SysApis.dictPage,
-        delete: SysApis.delDicts,
+        remove: SysApis.delDicts,
       },
       dictCode: '',
     }
@@ -83,18 +77,11 @@ export default {
   mounted() {
   },
   methods: {
-    showAdd() {
-      this.show.add = true
-    },
-    closeForm() {
-      this.show.add = false
-      this.show.edit = false
-      this.refreshData()
-    },
-    showEdit(e) {
-      this.$refs.AddDict.form = e
-      this.show.add = true
-      this.show.edit = true
+    iconHandler(text) {
+      if (text) {
+        return text.substring(text.indexOf("\"") + 1, text.lastIndexOf("\""))
+      }
+      return "appstore"
     },
     showAddItem(e) {
       this.dictCode = e.id
@@ -108,29 +95,8 @@ export default {
       this.dictCode = e.code
       this.show.detail = true
     },
-
     closeDetail() {
       this.show.detail = false
-    },
-    showEditItem(e) {
-      this.itemForm = e
-      this.show.addItem = true
-    },
-
-    submitAddItemForm() {
-      this.$refs.dictItemForm.validate(valid => {
-        if (valid) {
-          this.$http.post(this.url.saveDictItems, this.itemForm).then(result => {
-            if (result.status !== 200) {
-              this.$message.error(result.message)
-              return
-            }
-            this.closeAddItem()
-          }).catch(function (error) {
-            console.error('出现错误:', error)
-          })
-        }
-      })
     },
   }
 }

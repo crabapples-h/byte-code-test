@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form layout="inline" @keyup.enter.native="getList">
-      <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <a-form-item label="用户名">
           <a-input placeholder="请输入用户名" v-model="queryParam.username" :allow-clear="true"/>
         </a-form-item>
@@ -17,7 +17,8 @@
       </a-space>
     </a-form>
     <a-divider/>
-    <add-user :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addUser"/>
+    <add-user :visible="show.add" @close="closeAdd" title="添加"/>
+    <add-user :visible="show.edit" @close="closeEdit" :is-edit="true" title="编辑" ref="editForm"/>
     <change-password :visible="show.changePassword" @cancel="closeChangePasswordForm" :user-id="userId"
                      ref="changePassword"/>
 
@@ -31,7 +32,7 @@
         <a-tag color="red" v-else>锁定</a-tag>
       </template>
       <template #action="value,record">
-        <a-space>
+        <a-space align="center" style="flex-wrap: wrap">
           <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:user:edit>编辑</a-button>
           <template v-if="record.username !== 'admin'">
             <c-pop-button title="确认要锁定吗" text="锁定" @click="lockUser(record)" type="danger" :ghost="true"
@@ -85,7 +86,7 @@ export default {
           width: 80
         },
         {
-          dataIndex: 'gender_dictValue',
+          dataIndex: 'gender_dictText',
           title: '性别',
           key: 'gender',
           align: 'center',
@@ -131,9 +132,10 @@ export default {
         list: SysApis.userPage,
         lock: SysApis.lockUser,
         unlock: SysApis.unlockUser,
-        delete: SysApis.delUser
+        remove: SysApis.delUser
       },
-      userId: ''
+      userId: '',
+      title: '添加',
     }
   },
   activated() {
@@ -141,21 +143,6 @@ export default {
   mounted() {
   },
   methods: {
-    showAdd() {
-      this.show.add = true
-      this.show.edit = false
-    },
-    closeForm() {
-      this.show.add = false
-      this.show.edit = false
-      this.refreshData()
-    },
-    showEdit(e) {
-      this.$refs.addUser.form = e
-      this.show.add = true
-      this.show.edit = true
-      this.$refs.addUser.loadUserRoles()
-    },
     showChangePassword(e) {
       this.userId = e.id
       this.show.changePassword = true

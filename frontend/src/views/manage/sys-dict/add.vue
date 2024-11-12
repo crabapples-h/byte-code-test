@@ -35,7 +35,7 @@ export default {
       type: Boolean,
       default: false
     },
-    cancel: {
+    close: {
       type: Function,
     },
   },
@@ -66,25 +66,6 @@ export default {
   mounted() {
   },
   methods: {
-    closeForm() {
-      this.form = {}
-      this.$emit('cancel')
-    },
-    submit() {
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          this.$http.post(this.url.save, this.form).then(result => {
-            if (result.status !== 200) {
-              this.$message.error(result.message)
-            }
-          }).catch(function (error) {
-            console.error('出现错误:', error)
-          }).finally(() => {
-            this.closeForm()
-          })
-        }
-      })
-    },
   }
 }
 </script>

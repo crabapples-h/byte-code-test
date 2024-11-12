@@ -1,6 +1,6 @@
 package cn.crabapples.system.websocket.entity;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 
 /**
  * TODO

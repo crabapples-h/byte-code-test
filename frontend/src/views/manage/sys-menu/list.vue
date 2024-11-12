@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form layout="inline" @keyup.enter.native="getList">
-      <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <a-form-item label="菜单">
           <a-input placeholder="请输入菜单" v-model="queryParam.name" :allow-clear="true"/>
         </a-form-item>
@@ -14,7 +14,7 @@
     <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination"
              :scroll="{x:true}" bordered>
       <span slot="action" slot-scope="text, record">
-        <a-space>
+      <a-space align="center" style="flex-wrap: wrap">
         <c-pop-button title="确定要删除吗" text="删除" type="danger" @click="remove(record)" v-auth:sys:menus:del/>
         <a-button type="primary" size="small" @click="showEdit(record)" v-auth:sys:menus:edit>编辑</a-button>
         <span v-if="record.menusType === 1">
@@ -24,7 +24,7 @@
         </a-space>
       </span>
       <span slot="icon" slot-scope="text, record">
-        <a-icon :type='text.substring(text.indexOf("\"") + 1,text.lastIndexOf("\"")) || "appstore"'/>
+        <a-icon :type='iconHandler(text)'/>
       </span>
       <span slot="type" slot-scope="text, record">
         <a-tag size="small" color="green" v-if="record.menusType === 1">菜单</a-tag>
@@ -32,7 +32,8 @@
         <a-tag size="small" color="purple" v-if="record.menusType === 3">超链接</a-tag>
       </span>
     </a-table>
-    <add-menu :visible="show.add" @cancel="closeForm" ref="addMenu"/>
+    <add-menu :visible="show.add" @close="closeAdd"/>
+    <add-menu :visible="show.edit" @close="closeEdit" ref="editForm"/>
   </div>
 </template>
 
@@ -56,7 +57,7 @@ export default {
           dataIndex: 'name',
           title: '名称',
           align: 'center',
-          width: 200
+          width: 180
         },
         {
           dataIndex: 'icon',
@@ -81,12 +82,13 @@ export default {
         {
           dataIndex: 'permission',
           title: '授权标识',
+          align: 'center',
         },
         {
           title: '操作',
           key: 'action',
           scopedSlots: {customRender: 'action'},
-          width: 200
+          width: 250
         }
       ],
       dataSource: [],
@@ -104,6 +106,12 @@ export default {
   mounted() {
   },
   methods: {
+     iconHandler(text) {
+      if (text) {
+        return text.substring(text.indexOf("\"") + 1, text.lastIndexOf("\""))
+      }
+      return "appstore"
+    },
     getList() {
       let page = this.getQueryPage()
       this.$http.get(this.url.list, {params: page}).then(result => {
@@ -145,21 +153,10 @@ export default {
         console.error('出现错误:', error)
       })
     },
-    showAdd() {
-      this.show.add = true
-    },
+
     showAddChild(e) {
-      this.$refs.addMenu.form.pid = e.id
-      this.show.add = true
-    },
-    showEdit(e) {
-      this.$refs.addMenu.form = e
-      this.show.add = true
-    },
-    closeForm() {
-      this.show.add = false
-      this.refreshData()
-      commonApi.refreshSysData()
+      this.$refs.editForm.form.pid = e.id
+      this.show.edit = true
     },
   }
 }

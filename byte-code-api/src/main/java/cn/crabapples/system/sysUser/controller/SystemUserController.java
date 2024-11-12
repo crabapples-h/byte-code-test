@@ -3,6 +3,7 @@ package cn.crabapples.system.sysUser.controller;
 import cn.crabapples.common.Groups;
 import cn.crabapples.common.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
+import cn.crabapples.common.dic.EnableDict;
 import cn.crabapples.system.dto.SysUserDTO;
 import cn.crabapples.system.sysUser.form.ResetPasswordForm;
 import cn.crabapples.system.sysUser.form.UpdatePasswordForm;
@@ -39,11 +40,12 @@ public class SystemUserController extends BaseController {
      */
     @GetMapping("/page")
 //    @ApiOperation(value = "获取用户列表", notes = "获取用户列表接口")
+    @EnableDict
     public ResponseDTO<IPage<SysUserDTO>> getUserPage(
             @RequestParam(required = false, defaultValue = "1") Integer pageIndex,
             @RequestParam(required = false, defaultValue = "10") Integer pageSize,
             UserForm form) {
-        log.info("收到请求->获取用户列表:[{}]", form);
+        log.info("收到请求->获取用户[分页]列表:[{}]", form);
         IPage<SysUserDTO> list = userService.findAll(pageIndex, pageSize, form);
         log.debug("返回结果->获取[分页]用户列表->完成:[{}]", list);
         return new ResponseDTO<>(list);
@@ -55,9 +57,9 @@ public class SystemUserController extends BaseController {
     @GetMapping("/list")
 //    @ApiOperation(value = "获取用户列表", notes = "获取用户列表接口")
     public ResponseDTO<List<SysUserDTO>> getUserList(UserForm form) {
-        log.info("收到请求->获取用户列表:[{}]", form);
+        log.info("收到请求->获取用户[不分页]列表:[{}]", form);
         List<SysUserDTO> list = userService.findAll(form);
-        log.debug("返回结果->获取[分页]用户列表->完成:[{}]", list);
+        log.debug("返回结果->获取[不分页]用户列表->完成:[{}]", list);
         return new ResponseDTO<>(list);
     }
 
@@ -68,10 +70,10 @@ public class SystemUserController extends BaseController {
         super.validator(form, Groups.IsAdd.class);
         boolean status = userService.saveUser(form);
         log.debug("返回结果->添加用户->完成:[{}]", status);
-        return new ResponseDTO<Boolean>().returnSuccess("操作成功",status);
+        return new ResponseDTO<Boolean>().returnSuccess("操作成功", status);
     }
 
-    @PostMapping("/del/{id}")
+    @DeleteMapping("/del/{id}")
 //    @ApiOperation(value = "删除用户", notes = "删除用户接口")
     public ResponseDTO<Boolean> delUser(@PathVariable String id) {
         log.info("收到请求->删除用户:[{}]", id);

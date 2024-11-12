@@ -3,7 +3,7 @@ package cn.crabapples.system.dto;
 import cn.crabapples.common.base.BaseEntity;
 import cn.crabapples.common.dic.Dict;
 import cn.crabapples.system.sysUser.entity.SysUser;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Getter;
 import lombok.Setter;
 
