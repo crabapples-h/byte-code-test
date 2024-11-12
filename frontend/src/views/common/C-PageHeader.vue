@@ -1,13 +1,17 @@
 <template>
   <div>
     <a-layout-header>
+
       <a-row>
         <a-col :span="4">
           <span class="title">{{ title }}</span>
         </a-col>
         <a-col :span="3" :offset="17">
-          <a-dropdown placement="topCenter">
-            <a-icon type="setting"/>
+          <a-dropdown placement="bottomCenter">
+            <span>
+              <span>{{ userInfo.name }}&nbsp;</span>
+              <a-icon type="setting"/>
+            </span>
             <a-menu slot="overlay">
               <a-menu-item key="1" @click="showUpdatePassword">
                 <a-icon type="user"/>
@@ -22,7 +26,6 @@
               <a-icon type="down"/>
             </a-button>
           </a-dropdown>
-          <span>{{ userInfo.name }}</span>
         </a-col>
       </a-row>
     </a-layout-header>
@@ -45,7 +48,7 @@
 
 <script>
 import CommonApi from '@/api/CommonApi'
-import { SysApis } from '@/api/Apis'
+import {SysApis} from '@/api/Apis'
 
 export default {
   name: "C-PageHeader",
@@ -53,7 +56,11 @@ export default {
     title: {
       type: String,
       default: '管理系统'
-    }
+    },
+    userInfo: {
+      type: Object,
+      default: {}
+    },
   },
   data() {
     return {
@@ -80,9 +87,6 @@ export default {
       },
       show: {
         updatePassword: false
-      },
-      userInfo: {
-        name: ''
       },
     };
   },
@@ -124,8 +128,8 @@ export default {
       })
     },
     logout() {
-      CommonApi.logout().then(res=> {
-        if(res.status===200){
+      CommonApi.logout().then(res => {
+        if (res.status === 200) {
           window.location.reload()
         }
       })

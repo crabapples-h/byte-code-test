@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-layout>
-      <c-page-header :title="title"/>
+      <c-page-header :title="title" :userInfo="userInfo"/>
       <a-layout>
         <c-page-menus :menus="$store.getters.MENUS" @clickMenu="clickMenu"/>
         <a-layout-content class="content">

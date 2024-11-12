@@ -1,5 +1,5 @@
 <template>
-  <a-drawer title="编辑" width="50%" :visible="visible" @close="closeForm">
+  <a-drawer :title="title" width="50%" :visible="visible" @close="closeForm">
     <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol"
                   ref="roleForm">
       <a-form-model-item label="ID" style="display: none">
@@ -45,6 +45,9 @@ export default {
     visible: {
       type: Boolean,
       default: false
+    },
+     title: {
+      type: String,
     },
     cancel: {
       type: Function,

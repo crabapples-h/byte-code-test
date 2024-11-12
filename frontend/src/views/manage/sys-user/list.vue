@@ -1,15 +1,32 @@
 <template>
   <div>
-    <a-button @click="showAdd" v-auth:sys:user:add>添加用户</a-button>
-    <a-divider />
-    <add-user :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addUser" />
+    <a-form layout="inline" @keyup.enter.native="getList">
+      <a-row class="query-form">
+        <a-col>
+          <a-form-item label="用户名">
+            <a-input placeholder="请输入用户名" v-model="queryParam.username" :allow-clear="true"/>
+          </a-form-item>
+           <a-form-item label="姓名">
+            <a-input placeholder="请输入姓名" v-model="queryParam.name" :allow-clear="true"/>
+          </a-form-item>
+           <a-form-item label="手机号">
+            <a-input placeholder="请输入手机号" v-model="queryParam.phone" :allow-clear="true"/>
+          </a-form-item>
+        </a-col>
+        <a-col :md="8" :sm="8">
+              <span style="float: left; overflow: hidden" class="table-page-search-submitButtons">
+                <a-button type="primary" @click="getList" icon="search">查询</a-button>
+                <a-button type="default" @click="resetSearch" icon="reload" style="margin-left: 8px">重置</a-button>
+                <a-button type="primary" @click="showAdd" icon="plus" v-auth:sys:user:add
+                          style="margin-left: 8px">添加</a-button>
+              </span>
+        </a-col>
+      </a-row>
+    </a-form>
+    <a-divider/>
+    <add-user :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addUser"/>
     <change-password :visible="show.changePassword" @cancel="closeChangePasswordForm" :user-id="userId"
-                     ref="changePassword" />
-
-<!--         <a-table-->
-<!--        ref='table'-->
-<!--        :size="$store.getters.componentSize"-->
-<!--        :loading='loading'>-->
+                     ref="changePassword"/>
 
 
     <a-table :data-source="dataSource" bordered
@@ -24,12 +41,12 @@
       <template #action="value,record">
         <template v-if="record.username !== 'admin'">
           <c-pop-button title="确认要锁定吗" text="锁定" @click="lockUser(record)" type="primary"
-                        v-if="record.status === 0" v-auth:sys:user:lock />
+                        v-if="record.status === 0" v-auth:sys:user:lock/>
           <c-pop-button title="确认要解锁吗" text="解锁" @click="unlockUser(record)"
-                        v-if="record.status === 1" v-auth:sys:user:unlock />
-          <a-divider type="vertical" />
-          <c-pop-button title="确认要删除吗" text="删除" @click="remove(record)" type="danger" v-auth:sys:user:del />
-          <a-divider type="vertical" />
+                        v-if="record.status === 1" v-auth:sys:user:unlock/>
+          <a-divider type="vertical"/>
+          <c-pop-button title="确认要删除吗" text="删除" @click="remove(record)" type="danger" v-auth:sys:user:del/>
+          <a-divider type="vertical"/>
           <a-button @click="showChangePassword(record)" size="small" v-auth:sys:user:resetpwd>修改密码</a-button>
           <a-button @click="showChangePassword(record)" v-auth:sys:user:change-password>修改密码</a-button>
         </template>
@@ -41,7 +58,7 @@
 
 <script>
 
-import { SysApis } from '@/api/Apis'
+import {SysApis} from '@/api/Apis'
 import SystemMinix from '@/minixs/SystemMinix'
 import AddUser from '@/views/manage/sys-user/add.vue'
 import ChangePassword from '@/views/manage/sys-user/change-password.vue'
@@ -101,14 +118,14 @@ export default {
           dataIndex: 'status',
           title: '状态',
           key: 'status',
-          scopedSlots: { customRender: 'status' },
+          scopedSlots: {customRender: 'status'},
           align: 'center',
           width: 200
         },
         {
           title: '操作',
           key: 'action',
-          scopedSlots: { customRender: 'action' },
+          scopedSlots: {customRender: 'action'},
           width: 250
         }
       ],
@@ -163,7 +180,7 @@ export default {
           return
         }
         this.$message.success(result.message)
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.log('请求出现错误:', error)
       }).finally(() => {
         this.refreshData()
@@ -176,7 +193,7 @@ export default {
           return
         }
         this.$message.success(result.message)
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.log('请求出现错误:', error)
       }).finally(() => {
         this.refreshData()
@@ -189,6 +206,12 @@ export default {
 
 <style lang="less" scoped>
 //@import "~@public/color.less";
+.query-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center
+}
 
 .drawer-bottom-button {
   position: absolute;
