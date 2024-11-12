@@ -4,14 +4,21 @@ crabapples.TOKEN_CACHE_TIME: 30
 crabapples.SALT: crabapples
 dataBaseParam: useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true
 #上传文件配置
-virtualPath: /file/
+virtualPath: '/file/'
+uploadPath: 'd:/uploadPath/'
+# 设置最大文件大小
+spring.servlet.multipart.max-file-size: 100MB
+# 设置最大请求大小
+spring.servlet.multipart.max-request-size: 100MB
 ###
 server.port: 9093
 server.application.name: learn
 
 spring.profiles.active: dev
-spring.servlet.multipart.max-file-size: 100MB
 
 mybatis-plus.mapper-locations: classpath*:mapper/*.xml,classpath*:cn/crabapples/system/**/dao/mybatis/xml/*.xml
 logging.file.name: logs/springboot-jwt/
+
+
+
 

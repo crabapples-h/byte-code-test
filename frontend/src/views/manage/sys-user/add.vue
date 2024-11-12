@@ -25,6 +25,9 @@
       <a-form-model-item label="电话" prop="phone">
         <a-input v-model="form.phone" placeholder="请输入电话号码"/>
       </a-form-model-item>
+      <a-form-model-item label="头像" prop="avatar">
+        <c-upload-v2 v-model="form.avatar" list-type="picture-card" :max="1"/>
+      </a-form-model-item>
       <a-form-model-item label="角色">
         <a-select mode="multiple" v-model="form.roleList" placeholder="请选择角色" :options="roleOptions"/>
       </a-form-model-item>
@@ -37,12 +40,13 @@
 </template>
 
 <script>
-
+import CUploadV2 from '@comp/c-file-upload-v2.vue'
 import {SysApis} from '@/api/Apis'
 import SystemMinix from '@/minixs/SystemMinix'
 
 export default {
   name: 'user-add',
+  components: {CUploadV2},
   mixins: [SystemMinix],
   props: {
     visible: {
@@ -157,6 +161,9 @@ export default {
     this.getRoleList()
   },
   methods: {
+    submit() {
+      console.log('this.form.avatar', this.form.avatar)
+    },
     getRoleList() {
       this.$http.get(this.url.roleList).then(result => {
         if (result.status !== 200) {

@@ -34,4 +34,13 @@ public class FileInfoController extends BaseController {
         log.info("返回结果->上传文件结束:[{}]", entity);
         return new ResponseDTO<>(entity);
     }
+
+    @PostMapping("/uploadFileV2")
+    @JwtIgnore
+    public ResponseDTO<String> uploadFileV2(HttpServletRequest request) {
+        log.info("收到请求->上传文件");
+        FileInfo entity = fileInfoService.uploadFile(request);
+        log.info("返回结果->上传文件结束:[{}]", entity);
+        return new ResponseDTO<>(entity.getVirtualPath());
+    }
 }
