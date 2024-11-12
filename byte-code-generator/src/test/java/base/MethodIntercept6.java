@@ -1,11 +1,16 @@
 package base;
 
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.implementation.bind.annotation.*;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
+/**
+ * 对静态方法插桩处理
+ */
+@Slf4j
 public class MethodIntercept6 {
     @RuntimeType
     public Object handler(
@@ -18,10 +23,8 @@ public class MethodIntercept6 {
             // 用于调用原方法
             // 若确定父类，也可用具体的父类来接受  @SuperCall TestSuperClass zuper
             @SuperCall Callable<?> zuper) throws Exception {
-        System.out.println("MethodIntercept6 clazz:" + clazz);
-        System.out.println("MethodIntercept6 targetMethod:" + targetMethod);
-        System.out.println("MethodIntercept6 args:" + Arrays.toString(args));
-        System.out.println("MethodIntercept6 zuper:" + zuper);
+        log.info("MethodIntercept6->\nclazz:[{}]\ntargetMethod:[{}]\nargs:[{}]\nsuper:[{}]",
+                clazz, targetMethod, Arrays.toString(args), zuper);
         // 调用原方法
         return zuper.call();
     }

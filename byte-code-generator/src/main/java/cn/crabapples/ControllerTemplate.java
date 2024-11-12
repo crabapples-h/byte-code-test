@@ -2,8 +2,7 @@ package cn.crabapples;
 
 import cn.crabapples.common.BaseController;
 import cn.crabapples.common.ResponseDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,12 +12,12 @@ import java.util.List;
 @RequestMapping("/api/")
 public class ControllerTemplate extends BaseController {
 
-//
-//    @PostMapping("/save")
-//    public ResponseDTO<Boolean> save() {
-//        return new ResponseDTO<>();
-//    }
-//
+
+    @PostMapping("/save")
+    public ResponseDTO<Boolean> save() {
+        return new ResponseDTO<>();
+    }
+
 //    @GetMapping("/page")
 //    public ResponseDTO<Page> page(
 //            @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex,
@@ -32,14 +31,14 @@ public class ControllerTemplate extends BaseController {
         return new ResponseDTO<>();
 
     }
-//
-//    @GetMapping("/get/{id}")
-//    public ResponseDTO info(@PathVariable String id) {
-//        return new ResponseDTO<>();
-//    }
-//
-//    @DeleteMapping("/remove/{id}")
-//    public ResponseDTO<Boolean> remove(@PathVariable String id) {
-//        return new ResponseDTO<>();
-//    }
+
+    @GetMapping("/get/{id}")
+    public ResponseDTO info(@PathVariable String id) {
+        return new ResponseDTO<>();
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public ResponseDTO<Boolean> remove(@PathVariable String id) {
+        return new ResponseDTO<>();
+    }
 }

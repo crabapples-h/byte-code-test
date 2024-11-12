@@ -205,7 +205,7 @@ public class ByteBuddyTest {
                 .make();
         unloaded.saveIn(new File(path));
     }
-./npc install -server=nps.crabapples.cn:38024 -vkey=0i4wbu9pqqmytgaq -type=tcp
+
     /**
      * 方法委托(委托给静态方法)
      */
@@ -281,7 +281,7 @@ public class ByteBuddyTest {
         DynamicType.Loaded<TestSuperClass> load = unloaded.load(getClass().getClassLoader());
         Class<? extends TestSuperClass> loaded = load.getLoaded();
         TestSuperClass testSuperClass = loaded.getDeclaredConstructor().newInstance();
-        Object o = testSuperClass.testMethod1(10);
+        Integer o = testSuperClass.testMethod1(10);
         System.err.println(o);
         load.saveIn(new File(path));
     }
