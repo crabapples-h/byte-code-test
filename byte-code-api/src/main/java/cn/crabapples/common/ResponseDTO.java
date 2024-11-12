@@ -19,13 +19,16 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class ResponseDTO<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer status;
     private String message;
     private Object data;
     private Long time;
+
+    public ResponseDTO() {
+        this.returnSuccess();
+    }
 
     private ResponseDTO(ResponseCode status, String message, T data) {
         this.status = status.getCode();
@@ -37,6 +40,12 @@ public class ResponseDTO<T> implements Serializable {
     public ResponseDTO(ResponseCode status, String message) {
         this.status = status.getCode();
         this.message = message;
+        this.time = System.currentTimeMillis();
+    }
+
+    public ResponseDTO(T data) {
+        this.status = ResponseCode.SUCCESS.getCode();
+        this.data = data;
         this.time = System.currentTimeMillis();
     }
 
@@ -54,35 +63,21 @@ public class ResponseDTO<T> implements Serializable {
         this.time = System.currentTimeMillis();
     }
 
-    public ResponseDTO(String message) {
-        this.status = ResponseCode.SUCCESS.getCode();
-        this.message = message;
-        this.time = System.currentTimeMillis();
-    }
-
-    public ResponseDTO(T data) {
-        this.status = ResponseCode.SUCCESS.getCode();
-        this.data = data;
-        this.time = System.currentTimeMillis();
-    }
-
-    public ResponseDTO(int status, String message) {
-        this.status = status;
-        this.message = message;
-        this.time = System.currentTimeMillis();
-    }
-
     /*---------------- SUCCESS -------------*/
-    public ResponseDTO<T> returnSuccess(String message, T data) {
-        return new ResponseDTO<>(ResponseCode.SUCCESS, message, data);
+    public ResponseDTO<T> returnSuccess() {
+        return returnSuccess(DIC.BASE_SUCCESS_MESSAGE, null);
     }
 
     public ResponseDTO<T> returnSuccess(T data) {
         return returnSuccess(DIC.BASE_SUCCESS_MESSAGE, data);
     }
 
-    public ResponseDTO<T> returnSuccess() {
-        return returnSuccess(DIC.BASE_SUCCESS_MESSAGE, null);
+    public ResponseDTO<T> returnSuccess(String message) {
+        return returnSuccess(message, null);
+    }
+
+    public ResponseDTO<T> returnSuccess(String message, T data) {
+        return new ResponseDTO<>(ResponseCode.SUCCESS, message, data);
     }
 
 
@@ -92,7 +87,7 @@ public class ResponseDTO<T> implements Serializable {
     }
 
     /*---------------- AUTH_FAIL -------------*/
-      public ResponseDTO<T> returnAuthFail(T data, String message) {
+    public ResponseDTO<T> returnAuthFail(T data, String message) {
         return new ResponseDTO<>(ResponseCode.AUTH_FAIL, message);
     }
 

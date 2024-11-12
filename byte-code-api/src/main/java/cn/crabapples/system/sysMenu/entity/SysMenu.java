@@ -3,8 +3,7 @@ package cn.crabapples.system.sysMenu.entity;
 import cn.crabapples.common.base.BaseEntity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
@@ -26,6 +25,7 @@ import static com.baomidou.mybatisplus.annotation.IdType.ASSIGN_UUID;
 @EqualsAndHashCode(callSuper = true)
 @Data(staticConstructor = "create")
 public class SysMenu extends BaseEntity<SysMenu> {
+
     @TableId(type = ASSIGN_UUID)
     private String id;
 
@@ -75,4 +75,7 @@ public class SysMenu extends BaseEntity<SysMenu> {
     @TableLogic
     @JSONField(serialize = false)
     private Integer delFlag;
+
+
+
 }

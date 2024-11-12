@@ -4,6 +4,8 @@ import cn.crabapples.common.Groups;
 import cn.crabapples.common.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
 import cn.crabapples.system.dto.SysUserDTO;
+import cn.crabapples.system.sysUser.form.ResetPasswordForm;
+import cn.crabapples.system.sysUser.form.UpdatePasswordForm;
 import cn.crabapples.system.sysUser.form.UserForm;
 import cn.crabapples.system.sysUser.service.SystemUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -66,7 +68,7 @@ public class SystemUserController extends BaseController {
         super.validator(form, Groups.IsAdd.class);
         boolean status = userService.saveUser(form);
         log.debug("返回结果->添加用户->完成:[{}]", status);
-        return new ResponseDTO<>(status);
+        return new ResponseDTO<Boolean>().returnSuccess("操作成功",status);
     }
 
     @PostMapping("/del/{id}")
@@ -98,7 +100,7 @@ public class SystemUserController extends BaseController {
 
     @PostMapping("/password/reset")
 //    @ApiOperation(value = "重置密码", notes = "重置密码接口")
-    public ResponseDTO<Boolean> resetPassword(@RequestBody UserForm.ResetPassword form) {
+    public ResponseDTO<Boolean> resetPassword(@RequestBody ResetPasswordForm form) {
         log.info("收到请求->重置密码:[{}]", form);
         super.validator(form, Groups.IsResetPassword.class);
         boolean status = userService.resetPassword(form);
@@ -108,7 +110,7 @@ public class SystemUserController extends BaseController {
 
     @PostMapping("/password/update")
 //    @ApiOperation(value = "修改密码", notes = "修改密码接口")
-    public ResponseDTO<Boolean> updatePassword(@RequestBody UserForm.UpdatePassword form) {
+    public ResponseDTO<Boolean> updatePassword(@RequestBody UpdatePasswordForm form) {
         log.info("收到请求->修改密码:[{}]", form);
         super.validator(form, Groups.IsUpdatePassword.class);
         boolean status = userService.updatePassword(form);

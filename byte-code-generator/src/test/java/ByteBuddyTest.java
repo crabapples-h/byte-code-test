@@ -205,7 +205,6 @@ public class ByteBuddyTest {
                 .make();
         unloaded.saveIn(new File(path));
     }
-
     /**
      * 方法委托(委托给静态方法)
      */

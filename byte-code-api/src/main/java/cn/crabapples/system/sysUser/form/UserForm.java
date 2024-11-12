@@ -26,60 +26,29 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-//@ApiModel("登录")
 public class UserForm extends BaseForm<SysUser> {
-    @Getter
-    @Setter
-    public static class ResetPassword {
-        @NotBlank(message = "id不能为空", groups = {Groups.IsNotNull.class})
-        private String id;
-
-        @Length(max = 16, message = "长度错误", groups = {Groups.IsCheckLength.class})
-        @NotBlank(message = "新密码不能为空", groups = {Groups.IsNotNull.class})
-//        @ApiModelProperty(example = "12345678")
-        private String newPassword;
-
-        @Length(max = 16, message = "长度错误", groups = {Groups.IsCheckLength.class})
-        @NotBlank(message = "重复密码不能为空", groups = {Groups.IsNotNull.class})
-//        @ApiModelProperty(example = "12345678")
-        private String againPassword;
-    }
-
-    @Getter
-    @Setter
-    public static class UpdatePassword extends ResetPassword{
-        @Length(max = 16, message = "长度错误", groups = {Groups.IsCheckLength.class})
-        @NotBlank(message = "密码不能为空", groups = {Groups.IsNotNull.class})
-//        @ApiModelProperty(example = "12345678")
-        private String oldPassword;
-    }
 
     @NotBlank(message = "id不能为空", groups = {Groups.IsNotNull.class, Groups.IsEdit.class})
     private String id;
 
     @Length(max = 16, message = "长度错误", groups = {Groups.IsCheckLength.class, Groups.IsLogin.class})
     @NotBlank(message = "用户名不能为空", groups = {Groups.IsNotNull.class, Groups.IsLogin.class})
-//    @ApiModelProperty(example = "admin")
     private String username;
 
     @Length(max = 16, message = "密码长度错误", groups = {Groups.IsCheckLength.class, Groups.IsLogin.class, Groups.IsUpdatePassword.class})
     @NotBlank(message = "密码不能为空", groups = {Groups.IsNotNull.class, Groups.IsLogin.class, Groups.IsUpdatePassword.class})
-//    @ApiModelProperty(example = "12345678")
     private String password;
 
     @Length(max = 16, message = "原密码长度错误", groups = {Groups.IsCheckLength.class, Groups.IsUpdatePassword.class})
     @NotBlank(message = "原密码不能为空", groups = {Groups.IsNotNull.class, Groups.IsUpdatePassword.class})
-//    @ApiModelProperty(example = "12345678")
     private String oldPassword;
 
     @Length(max = 16, message = "新密码长度错误", groups = {Groups.IsCheckLength.class, Groups.IsUpdatePassword.class})
     @NotBlank(message = "新密码不能为空", groups = {Groups.IsNotNull.class, Groups.IsUpdatePassword.class})
-//    @ApiModelProperty(example = "12345678")
     private String newPassword;
 
     @Length(max = 16, message = "重复密码长度错误", groups = {Groups.IsCheckLength.class, Groups.IsUpdatePassword.class})
     @NotBlank(message = "重复密码不能为空", groups = {Groups.IsNotNull.class, Groups.IsUpdatePassword.class})
-//    @ApiModelProperty(example = "12345678")
     private String againPassword;
 
 
