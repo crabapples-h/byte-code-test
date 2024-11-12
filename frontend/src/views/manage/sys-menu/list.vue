@@ -12,7 +12,7 @@
     </a-form>
     <a-divider/>
     <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination"
-             :scroll="{y:600}">
+             :scroll="{x:true}" bordered>
       <span slot="action" slot-scope="text, record">
         <a-space>
         <c-pop-button title="确定要删除吗" text="删除" type="danger" @click="remove(record)" v-auth:sys:menus:del/>
@@ -55,20 +55,28 @@ export default {
         {
           dataIndex: 'name',
           title: '名称',
+          align: 'center',
+          width: 200
         },
         {
           dataIndex: 'icon',
           title: '图标',
           scopedSlots: {customRender: 'icon'},
+          align: 'center',
+          width: 80
         },
         {
           dataIndex: 'sort',
           title: '排序',
+          align: 'center',
+          width: 80
         },
         {
           dataIndex: 'type',
           title: '类型',
           scopedSlots: {customRender: 'type'},
+          align: 'center',
+          width: 80
         },
         {
           dataIndex: 'permission',
@@ -78,7 +86,7 @@ export default {
           title: '操作',
           key: 'action',
           scopedSlots: {customRender: 'action'},
-          width: 250
+          width: 200
         }
       ],
       dataSource: [],

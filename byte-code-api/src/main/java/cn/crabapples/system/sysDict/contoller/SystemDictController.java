@@ -43,7 +43,7 @@ public class SystemDictController extends BaseController {
         log.info("收到请求->保存系统字典:[{}]", form);
         boolean status = dictService.saveDict(form);
         log.debug("返回结果->保存系统字典完成:[{}]", status);
-        return new ResponseDTO<>(status);
+        return new ResponseDTO<Boolean>().returnSuccess(status);
     }
 
     @PostMapping("/remove/{id}")
@@ -52,7 +52,7 @@ public class SystemDictController extends BaseController {
         log.info("收到请求->删除系统字典:[{}]", id);
         boolean status = dictService.deleteById(id);
         log.debug("返回结果->删除系统字典完成:[{}]", status);
-        return new ResponseDTO<>(status);
+        return new ResponseDTO<Boolean>().returnSuccess(status);
     }
 
     @PostMapping("/item/save")
@@ -61,7 +61,7 @@ public class SystemDictController extends BaseController {
         log.info("收到请求->保存系统字典项:[{}]", form);
         boolean status = dictService.saveDictItem(form);
         log.debug("返回结果->保存系统字典项完成:[{}]", status);
-        return new ResponseDTO<>(status);
+        return new ResponseDTO<Boolean>().returnSuccess(status);
     }
 
     @GetMapping("/item/list/code/{code}")
@@ -70,7 +70,7 @@ public class SystemDictController extends BaseController {
         log.info("收到请求->获取系统字典项,code:[{}]", code);
         List<SysDictItem> list = dictService.getDictItemListByCode(code);
         log.debug("返回结果->获取系统字典项完成:[{}]", list);
-        return new ResponseDTO<>(list);
+        return new ResponseDTO<List<SysDictItem>>().returnSuccess(list);
     }
 
 
@@ -89,6 +89,6 @@ public class SystemDictController extends BaseController {
         log.info("收到请求->删除系统字典项:[{}]", id);
         boolean status = dictService.deleteItemById(id);
         log.debug("返回结果->删除系统字典项完成:[{}]", status);
-        return new ResponseDTO<>(status);
+        return new ResponseDTO<Boolean>().returnSuccess(status);
     }
 }

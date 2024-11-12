@@ -13,7 +13,7 @@
     <a-divider/>
     <add-role :visible="show.add" @cancel="closeForm" :is-edit="show.edit" ref="addMenu" :title="title"/>
     <role-detail :visible="show.detail" @cancel="closeDetail" :role-id="detailId" ref="detail"/>
-    <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination">
+    <a-table :data-source="dataSource" rowKey="id" :columns="columns" :pagination="pagination" bordered>
         <span slot="action" slot-scope="text, record">
         <a-space>
         <c-pop-button title="确定要删除吗" text="删除" type="danger" size="small" @click="remove(record)"

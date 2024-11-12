@@ -149,7 +149,7 @@ public enum DictEnum {
             List<SysDictItem> dictValueList = dictService.getDictItemListByCode(dictCode);
             dictItemMap = new HashMap<>();
             for (SysDictItem item : dictValueList) {
-                dictItemMap.put(item.getCode(), item.getValue());
+                dictItemMap.put(item.getText(), item.getValue());
             }
         }
         redisTemplate.opsForValue().set(dictCode, dictItemMap, 10, TimeUnit.MINUTES);

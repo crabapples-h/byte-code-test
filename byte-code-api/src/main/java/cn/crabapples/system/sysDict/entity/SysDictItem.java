@@ -26,7 +26,7 @@ public class SysDictItem extends BaseEntity<SysDictItem> {
     private String id;
 
     // 名称
-    private String code;
+    private String text;
     // 值
     private String value;
     // 字典编码

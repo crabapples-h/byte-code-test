@@ -23,6 +23,12 @@ export default {
             form: {},
             spinning: false,
             queryParam: {},
+            scrollY: 500
+        }
+    },
+    watch: {
+        dataSource() {
+            this.scrollY = getTableScroll();
         }
     },
     created() {
@@ -33,6 +39,23 @@ export default {
     mounted() {
     },
     methods: {
+        getTableScroll(extraHeight = 74, id) {
+            let tHeader = null
+            if (id) {
+                tHeader = document.getElementById(id) ? document.getElementById(id).getElementsByClassName("ant-table-thead")[0] : null
+            } else {
+                tHeader = document.getElementsByClassName("ant-table-thead")[0]
+            }
+            //表格内容距离顶部的距离
+            let tHeaderBottom = 0
+            if (tHeader) {
+                tHeaderBottom = tHeader.getBoundingClientRect().bottom
+            }
+            const windowHeight = document.documentElement.clientHeight
+            //窗体高度-表格内容顶部的高度-表格内容底部的高度
+            let height = windowHeight - tHeaderBottom - extraHeight
+            return height
+        },
         resetSearch() {
             this.queryParam = {}
             this.refreshData()
