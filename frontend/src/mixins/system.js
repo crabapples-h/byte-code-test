@@ -1,4 +1,4 @@
-import {initCPagination} from '@/views/common/C-Pagination'
+import {initCPagination} from '@/views/common/CPagination'
 import {TreeSelect} from 'ant-design-vue'
 import CButton from '@comp/c-button.vue'
 import CPopButton from '@comp/c-pop-button.vue'

@@ -1,4 +1,4 @@
-<template>
+<template >
   <a-layout>
     <c-page-header :title="title" :userInfo="userInfo" style="height: 7vh" :theme="theme"/>
     <a-layout :style="showFooter? {height: '87vh'} : {height: '93vh'}">
@@ -41,9 +41,12 @@ export default {
   mounted() {
     this.$message.info('首页')
     this.userInfo = this.$store.getters.USER_BASE_INFO
+    console.log('mounted',this.userInfo)
+    console.log('$store',this.$store)
   },
   methods: {
     clickMenu(e) {
+      console.log('点击菜单',e);
       if (e.menusType === 3) {
         window.open(e.link)
       } else {

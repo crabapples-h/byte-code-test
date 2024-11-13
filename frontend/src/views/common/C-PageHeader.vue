@@ -102,6 +102,7 @@ export default {
   activated() {
   },
   mounted() {
+    // console.log('mounted',this.userInfo)
     // this.$router.push({name: 'welcome'})
   },
   methods: {

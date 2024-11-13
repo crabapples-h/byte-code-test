@@ -32,7 +32,7 @@ export default {
         localStorage.setItem('LAST_PAGE', _this.$route.path)
       }
       // 刷新时做一个标记
-      localStorage.setItem('RELOAD_PAGE', 1)
+      localStorage.setItem('RELOAD_PAGE', '1')
       // event.returnValue = '确定要离开页面吗？'
     })
   },

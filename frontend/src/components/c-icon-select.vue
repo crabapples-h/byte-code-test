@@ -20,13 +20,10 @@
 <script>
 import system from '@/mixins/system'
 // antd图标库
-import "@public/iconfont/icon-antd"
 import IconAntd from "@public/iconfont/icon-antd.json"
 // lolita图标库
-import "@public/iconfont/icon-lolita"
 import IconLolita from "@public/iconfont/icon-lolita.json"
 // 可爱图标库
-import "@public/iconfont/icon-cute"
 import IconCute from "@public/iconfont/icon-cute.json"
 
 export default {

@@ -1,89 +1,66 @@
 <template>
-  <a-layout-sider :theme="theme">
+  <a-layout-sider theme="light">
     <a-menu mode="inline" :theme="theme" style="height: 100%"
-            :default-open-keys="OPEN_MENU_IDS"
-            :defaultSelectedKeys="SELECT_MENU_IDS">
+            :default-open-keys="openMenuIds"
+            :defaultSelectedKeys="selectMenuIds">
       <template v-for="item in menus">
-        <a-menu-item v-if="!item.children" :key="item.key">
-           <svg class="iconfont" aria-hidden="true">
-                <use :xlink:href="'#icon-'+item.icon"></use>
-              </svg>
+        <a-menu-item v-if="!item.children" :key="item.key" @click="click(item)">
+          <svg class="iconfont" aria-hidden="true">
+            <use :xlink:href="'#icon-'+item.icon"></use>
+          </svg>
           <span>{{ item.name }}</span>
         </a-menu-item>
-
-        <template v-else>
-          <a-sub-menu :key="item.id">
-            <span slot="title">
-               <svg class="iconfont" aria-hidden="true">
-                <use :xlink:href="'#icon-'+item.icon"></use>
-              </svg>
-              <span>{{ item.name }}</span>
-            </span>
-            <a-menu-item :key="item.key" v-for="item in item.children">
-              <svg class="iconfont" aria-hidden="true">
-                <use :xlink:href="'#icon-'+item.icon"></use>
-              </svg>
-              <span>{{ item.name }}</span>
-            </a-menu-item>
-          </a-sub-menu>
-        </template>
+        <sub-menu v-else :key="item.id" :menu-item="item" @clickMenu="click"/>
       </template>
     </a-menu>
   </a-layout-sider>
 </template>
 
 <script>
-// recommend use functional component
-// <template functional>
-//   <a-sub-menu :key="props.menuInfo.key">
-//     <span slot="title">
-//       <a-icon type="mail" /><span>{{ props.menuInfo.title }}</span>
-//     </span>
-//     <template v-for="item in props.menuInfo.children">
-//       <a-menu-item v-if="!item.children" :key="item.key">
-//         <a-icon type="pie-chart" />
-//         <span>{{ item.title }}</span>
-//       </a-menu-item>
-//       <sub-menu v-else :key="item.key" :menu-info="item" />
-//     </template>
-//   </a-sub-menu>
-// </template>
-// export default {
-//   props: ['menuInfo'],
-// };
-import {Menu} from 'ant-design-vue';
+import {Menu} from "ant-design-vue";
 
 const SubMenu = {
   template: `
-    <p>1213</p>
-    <!--    <a-sub-menu :key="menuInfo.id" v-bind="$props" v-on="$listeners">-->
-    <!--      <p>{{ menuInfo }}</p>-->
-    <!--        <span slot="title">-->
-    <!--          <a-icon type="mail"/><span>{{ menuInfo.name }}</span>-->
-    <!--        </span>-->
-    <!--      <template v-for="item in menuInfo.children">-->
-    <!--        <a-menu-item v-if="!item.children" :key="item.key">-->
-    <!--          <a-icon type="pie-chart"/>-->
-    <!--          <span>{{ item.name }}</span>-->
-    <!--        </a-menu-item>-->
-    <!--        <sub-menu v-else :key="item.key" :menu-info="item"/>-->
-    <!--      </template>-->
-    <!--    </a-sub-menu>-->
+    <a-sub-menu :key="menuItem.id" v-bind="$props" v-on="$listeners">
+        <span slot="title">
+            <svg class="iconfont" aria-hidden="true">
+            <use :xlink:href="'#icon-'+menuItem.icon"></use>
+          </svg>
+          <span>{{ menuItem.name }}</span>
+        </span>
+      <template v-for="item in menuItem.children">
+        <a-menu-item v-if="!item.children" :key="item.id" @click="click(item)">
+          <svg class="iconfont" aria-hidden="true">
+            <use :xlink:href="'#icon-'+item.icon"></use>
+          </svg>
+          <span>{{ item.name }}</span>
+        </a-menu-item>
+        <sub-menu v-else :key="item.id" :menu-item="item"/>
+      </template>
+    </a-sub-menu>
   `,
   name: 'SubMenu',
   // must add isSubMenu: true
   isSubMenu: true,
   props: {
     ...Menu.SubMenu.props,
+    clickMenu: {
+      type: Function
+    },
     // Cannot overlap with properties within Menu.SubMenu.props
-    menuInfo: {
+    menuItem: {
       type: Object,
       default: () => ({}),
     },
   },
   mounted() {
-    console.log(this.menuInfo.name)
-    console.log(SubMenu)
+  },
+  methods: {
+    click(e) {
+      localStorage.setItem('OPEN_MENU_IDS', e.pid)
+      localStorage.setItem('SELECT_MENU_IDS', e.id)
+      this.$emit('clickMenu', e)
+    },
   }
 };
 
@@ -91,6 +68,7 @@ export default {
   components: {
     'sub-menu': SubMenu,
   },
+  isRootMenu: false,
   props: {
     theme: {
       type: String,
@@ -106,12 +84,33 @@ export default {
       type: Function,
     },
   },
+  computed: {
+    selectMenuIds() {
+      let SELECT_MENU_IDS = [localStorage.getItem('SELECT_MENU_IDS')]
+      SELECT_MENU_IDS = SELECT_MENU_IDS.filter(e => e != null)
+      console.debug('selectMenuIds', SELECT_MENU_IDS)
+      return SELECT_MENU_IDS
+    },
+    openMenuIds() {
+      let OPEN_MENU_IDS = [localStorage.getItem('OPEN_MENU_IDS')]
+      OPEN_MENU_IDS = OPEN_MENU_IDS.filter(e => e != null)
+      console.debug('openMenuIds', OPEN_MENU_IDS)
+      return OPEN_MENU_IDS
+    }
+  },
   data() {
     return {
-      OPEN_MENU_IDS: [localStorage.getItem('OPEN_MENU_IDS')],
-      SELECT_MENU_IDS: [localStorage.getItem('SELECT_MENU_IDS')],
     };
   },
-  methods: {},
+  methods: {
+    click(e) {
+      console.log('内部点击菜单', e)
+      localStorage.setItem('OPEN_MENU_IDS', e.pid)
+      localStorage.setItem('SELECT_MENU_IDS', e.id)
+      this.$emit('clickMenu', e)
+    },
+  },
+  mounted() {
+  }
 };
 </script>
