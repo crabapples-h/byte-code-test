@@ -11,6 +11,7 @@ import '@/utils/permission'
 import storage from '@/store/storage'
 import VueCanvasPoster from 'vue-canvas-poster'
 
+
 Vue.use(VueCanvasPoster)
 
 Vue.config.productionTip = false

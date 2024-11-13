@@ -30,13 +30,13 @@
 <script>
 import commonApi from '@/api/CommonApi'
 import {SysApis} from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 import AddRole from '@/views/manage/sys-role/add.vue'
 import RoleDetail from '@/views/manage/sys-role/detail.vue'
 
 export default {
   name: 'role-list',
-  mixins: [SystemMinix],
+  mixins: [system],
   components: {AddRole, RoleDetail},
   data() {
     return {

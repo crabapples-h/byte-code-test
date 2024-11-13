@@ -35,14 +35,14 @@
 <script>
 
 import {SysApis} from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 import AddDict from '@/views/manage/sys-dict/add.vue'
 import AddDictItem from '@/views/manage/sys-dict/add-item.vue'
 import DictDetail from '@/views/manage/sys-dict/detail.vue'
 
 export default {
   name: 'menus-list',
-  mixins: [SystemMinix],
+  mixins: [system],
   components: {
     AddDict,
     AddDictItem,

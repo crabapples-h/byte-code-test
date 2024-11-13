@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 import {buildTree} from '@/utils/ListUtils'
 import {SysApis} from '@/api/Apis'
 
 export default {
   name: 'role-detail',
-  mixins: [SystemMinix],
+  mixins: [system],
   props: {
     visible: {
       type: Boolean,

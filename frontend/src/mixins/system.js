@@ -36,18 +36,19 @@ export default {
             uploadUrl: '/api/uploadFile',
             uploadUrlV2: '/api/uploadFileV2',
             show: {
-                add: true,
+                add: false,
                 edit: false,
                 detail: false,
+                extend: false,
             },
             spinning: false,
             queryParam: {},
 
             formRules: formRules,
         }
-    },icon-cloud-syncicon-cloud-sync
-    //    var iconFontList = document.querySelectorAll('.icon-twrap')
-    // Array.from(a).forEach(v => v.click())
+    },
+    // let icons = document.querySelectorAll('.icon-twrap')
+    // Array.from(icons).forEach(v => v.click())
     watch: {
         dataSource() {
             this.scrollY = this.getTableScroll();
@@ -159,9 +160,15 @@ export default {
                 }
             })
         },
+        showExtend() {
+            this.show.extend = true
+        },
+        closeExtend() {
+            this.show.extend = false
+            this.$emit('closeExtend')
+        },
         showAdd() {
             this.show.add = true
-
         },
         closeAdd() {
             this.show.add = false

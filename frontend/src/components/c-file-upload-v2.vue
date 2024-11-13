@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import system, {getBase64} from '@/minixs/SystemMinix'
+import system, {getBase64} from '@/mixins/system'
 
 export default {
   name: 'c-file-upload',

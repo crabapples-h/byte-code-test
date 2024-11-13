@@ -42,12 +42,12 @@
 <script>
 import CUploadV2 from '@comp/c-file-upload-v2.vue'
 import {SysApis} from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 
 export default {
   name: 'user-add',
   components: {CUploadV2},
-  mixins: [SystemMinix],
+  mixins: [system],
   props: {
     visible: {
       type: Boolean,

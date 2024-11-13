@@ -69,4 +69,12 @@ export default {
   height: 100vh;
   width: 100vw;
 }
+
+.iconfont {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

@@ -22,13 +22,13 @@
 <script>
 
 import { SysApis } from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 import AddDictItem from '@/views/manage/sys-dict/add-item.vue'
 
 export default {
 	name: 'dict-add',
 	components: {AddDictItem},
-	mixins: [SystemMinix],
+	mixins: [system],
 	props: {
 		visible: {
 			type: Boolean,

@@ -27,11 +27,11 @@
 
 <script>
 import {SysApis} from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 
 export default {
   name: 'add-role',
-  mixins: [SystemMinix],
+  mixins: [system],
   props: {
     visible: {
       type: Boolean,

@@ -51,13 +51,13 @@
 <script>
 
 import {SysApis} from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 import AddUser from '@/views/manage/sys-user/add.vue'
 import ChangePassword from '@/views/manage/sys-user/change-password.vue'
 
 export default {
   name: 'user-list',
-  mixins: [SystemMinix],
+  mixins: [system],
   components: {
     AddUser, ChangePassword
   },

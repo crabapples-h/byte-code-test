@@ -24,7 +24,10 @@
         </a-space>
       </span>
       <span slot="icon" slot-scope="text, record">
-        <a-icon :type='iconHandler(text)'/>
+<!--        <a-icon :type='iconHandler(text)'/>-->
+           <svg class="iconfont" aria-hidden="true" style="width: 50px;height: 50px">
+            <use :xlink:href="'#icon-'+text"></use>
+          </svg>
       </span>
       <span slot="type" slot-scope="text, record">
         <a-tag size="small" color="green" v-if="record.menusType === 1">菜单</a-tag>
@@ -39,14 +42,13 @@
 
 <script>
 
-import commonApi from '@/api/CommonApi'
 import {SysApis} from '@/api/Apis'
-import SystemMinix from '@/minixs/SystemMinix'
+import system from '@/mixins/system'
 import AddMenu from '@/views/manage/sys-menu/add.vue'
 
 export default {
   name: 'menu-list',
-  mixins: [SystemMinix],
+  mixins: [system],
   components: {
     AddMenu
   },
@@ -106,11 +108,11 @@ export default {
   mounted() {
   },
   methods: {
-     iconHandler(text) {
+    iconHandler(text) {
       if (text) {
         return text.substring(text.indexOf("\"") + 1, text.lastIndexOf("\""))
       }
-      return "appstore"
+      return "setting-fill"
     },
     getList() {
       let page = this.getQueryPage()
