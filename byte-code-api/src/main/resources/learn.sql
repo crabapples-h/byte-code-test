@@ -11,7 +11,7 @@
  Target Server Version : 80402 (8.4.2)
  File Encoding         : 65001
 
- Date: 12/11/2024 17:49:54
+ Date: 13/11/2024 11:47:50
 */
 
 SET NAMES utf8mb4;
@@ -41,6 +41,10 @@ CREATE TABLE `file_info` (
 BEGIN;
 INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('0002d5abea1b07d0561102d663368425', NULL, b'0', NULL, 'image/jpeg', '2223362', '6lT9QNO3ZQKK4611082a5b5b14a232a20d04f7b0f788.jpg', 'd:\\uploadPath\\ffbfb32386c74b39a0fa4f8a36ab9770.jpg', '/file/ffbfb32386c74b39a0fa4f8a36ab9770.jpg', NULL);
 INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('16dcc16a160acf788e9bf19edecc888a', NULL, b'0', NULL, 'image/jpeg', '2223362', 'Z9bY9wibllxS4611082a5b5b14a232a20d04f7b0f788.jpg', 'd:\\uploadPath\\498176723cc24b71b8d8206c0f25d616.jpg', '/file/498176723cc24b71b8d8206c0f25d616.jpg', NULL);
+INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('1856503789444427778', '2024-11-13 09:06:10', b'0', '2024-11-13 09:06:10', 'image/png', '6106908', '截屏2024-10-15 16.51.45.png', '/Users/mshe/developer/uploadPath/8617528f3c1a4425a7f827bbd6a90880.png', '/file/8617528f3c1a4425a7f827bbd6a90880.png', NULL);
+INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('1856515442038829058', '2024-11-13 09:52:28', b'0', '2024-11-13 09:52:28', 'image/png', '4339861', '截屏2024-10-15 16.52.07.png', '/Users/mshe/developer/uploadPath/4a5ae35706114cf2896833a97a9d742b.png', '/file/4a5ae35706114cf2896833a97a9d742b.png', NULL);
+INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('1856515637841522690', '2024-11-13 09:53:15', b'0', '2024-11-13 09:53:15', 'image/png', '6106908', '截屏2024-10-15 16.51.45.png', '/Users/mshe/developer/uploadPath/5106980077784fe88d1babe3ecf18f68.png', '/file/5106980077784fe88d1babe3ecf18f68.png', NULL);
+INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('1856522208109686785', '2024-11-13 10:19:21', b'0', '2024-11-13 10:19:21', 'image/png', '6106908', '截屏2024-10-15 16.51.45.png', '/Users/mshe/developer/uploadPath/4f3f8f9f199d492c9cdf8861a2efecc1.png', '/file/4f3f8f9f199d492c9cdf8861a2efecc1.png', NULL);
 INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('18b99da8ffb9087562e7aebbf0ac2df5', NULL, b'0', NULL, 'image/jpeg', '2223362', '81vNblS2xZOz4611082a5b5b14a232a20d04f7b0f788.jpg', 'd:\\uploadPath\\adcd5d335acd47629bc397cdbd912ee1.jpg', '/file/adcd5d335acd47629bc397cdbd912ee1.jpg', NULL);
 INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('194ec94409b0f1c12ae2da16ffb14845', NULL, b'0', NULL, 'image/jpeg', '2223362', '1t7LFqIx3MFg4611082a5b5b14a232a20d04f7b0f788.jpg', 'd:\\uploadPath\\ff9f43eb1f2a4f788985d2ec169b672b.jpg', '/file/ff9f43eb1f2a4f788985d2ec169b672b.jpg', NULL);
 INSERT INTO `file_info` (`id`, `create_time`, `del_flag`, `update_time`, `content_type`, `file_size`, `old_name`, `upload_path`, `virtual_path`, `create_by`) VALUES ('35acf5a3ed5ed8c1aa1625630ab25cee', NULL, b'0', NULL, 'image/jpeg', '2435559', 'nuWJboFboF9Yb13a268fe38824d5ed9a87f2251fc69a.jpg', 'd:\\uploadPath\\bdf20b08e3a64cc9ba268b2c035e382a.jpg', '/file/bdf20b08e3a64cc9ba268b2c035e382a.jpg', NULL);
@@ -120,6 +124,10 @@ CREATE TABLE `sys_dict_item` (
 -- Records of sys_dict_item
 -- ----------------------------
 BEGIN;
+INSERT INTO `sys_dict_item` (`id`, `create_by`, `create_time`, `del_flag`, `update_time`, `dict_code`, `text`, `value`) VALUES ('67216ac030248acd91affddcf0f0001c', NULL, NULL, 1, '2024-11-12 17:54:41', 'gender', '测试', '4');
+INSERT INTO `sys_dict_item` (`id`, `create_by`, `create_time`, `del_flag`, `update_time`, `dict_code`, `text`, `value`) VALUES ('812d2bfc1950da07d0680562b3016d3e', NULL, NULL, 0, NULL, 'gender', '男', '0');
+INSERT INTO `sys_dict_item` (`id`, `create_by`, `create_time`, `del_flag`, `update_time`, `dict_code`, `text`, `value`) VALUES ('83a5d952e6bbad3bf41106c52949333c', NULL, NULL, 0, NULL, 'gender', '女', '1');
+INSERT INTO `sys_dict_item` (`id`, `create_by`, `create_time`, `del_flag`, `update_time`, `dict_code`, `text`, `value`) VALUES ('d97d32b988be22c772e4e5b6ab9b8be8', NULL, NULL, 0, NULL, 'gender', '未知', '3');
 COMMIT;
 
 -- ----------------------------
@@ -258,19 +266,20 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` varchar(64) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `del_flag` int NOT NULL DEFAULT '0' COMMENT '删除标记',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `age` int NOT NULL DEFAULT '0' COMMENT '年龄',
   `name` varchar(32) DEFAULT NULL COMMENT '姓名',
   `password` varchar(64) DEFAULT NULL COMMENT '密码',
   `status` bit(1) NOT NULL DEFAULT b'0' COMMENT '用户状态标记 0:正常 1:禁用',
   `username` varchar(32) DEFAULT NULL COMMENT '用户名',
   `mail` varchar(64) DEFAULT NULL COMMENT '邮箱',
-  `last_modified_by` varchar(32) DEFAULT NULL COMMENT '最后操作用户',
   `phone` varchar(15) DEFAULT NULL COMMENT '电话',
-  `create_by` varchar(64) DEFAULT NULL COMMENT '创建人',
   `gender` tinyint DEFAULT NULL COMMENT '性别',
+  `avatar` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '头像',
+  `del_flag` int NOT NULL DEFAULT '0' COMMENT '删除标记',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_by` varchar(64) DEFAULT NULL COMMENT '创建人',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '最后操作用户',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_51bvuyvihefoh4kp5syh2jpi4` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -279,9 +288,9 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` (`id`, `create_time`, `del_flag`, `update_time`, `age`, `name`, `password`, `status`, `username`, `mail`, `last_modified_by`, `phone`, `create_by`, `gender`) VALUES ('001', NULL, 0, '2023-09-13 00:57:05', 20, 'he quan', '21232f297a57a5a743894a0e4a801fc3', b'0', 'admin', '162165436@qq.com', NULL, '11111111', NULL, 1);
-INSERT INTO `sys_user` (`id`, `create_time`, `del_flag`, `update_time`, `age`, `name`, `password`, `status`, `username`, `mail`, `last_modified_by`, `phone`, `create_by`, `gender`) VALUES ('6e4d94b34fe44d7cd79fd199a8a62b3c', NULL, 0, '2024-11-11 22:21:59', 11, '111', NULL, b'0', '111', '111', NULL, '111', NULL, NULL);
-INSERT INTO `sys_user` (`id`, `create_time`, `del_flag`, `update_time`, `age`, `name`, `password`, `status`, `username`, `mail`, `last_modified_by`, `phone`, `create_by`, `gender`) VALUES ('d69f043524094cf90f60a6c55e8c3cfa', NULL, 0, NULL, 18, '222', '698d51a19d8a121ce581499d7b701668', b'0', '222', '222', NULL, '11111111', NULL, 2);
+INSERT INTO `sys_user` (`id`, `age`, `name`, `password`, `status`, `username`, `mail`, `phone`, `gender`, `avatar`, `del_flag`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES ('001', 20, 'admin', '21232f297a57a5a743894a0e4a801fc3', b'0', 'admin', '12345@qq.com', '13111111111', 1, '/file/4f3f8f9f199d492c9cdf8861a2efecc1.png', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_user` (`id`, `age`, `name`, `password`, `status`, `username`, `mail`, `phone`, `gender`, `avatar`, `del_flag`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES ('6e4d94b34fe44d7cd79fd199a8a62b3c', 11, '111', NULL, b'0', '111', '111', '111', NULL, NULL, 0, NULL, NULL, '2024-11-11 22:21:59', NULL);
+INSERT INTO `sys_user` (`id`, `age`, `name`, `password`, `status`, `username`, `mail`, `phone`, `gender`, `avatar`, `del_flag`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES ('d69f043524094cf90f60a6c55e8c3cfa', 18, '222', '698d51a19d8a121ce581499d7b701668', b'0', '222', '222', '11111111', 2, NULL, 0, NULL, NULL, NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -301,13 +310,13 @@ CREATE TABLE `sys_user_roles` (
 -- Records of sys_user_roles
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('001', '37276b55-dc6a-49d5-9ae3-271e1783d442');
-INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('001', '01841a2e-309f-4e3a-9609-e2574695dbe3');
-INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('001', '12578678-e523-4448-9ccb-c4ba6ef01f96');
 INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('6e4d94b34fe44d7cd79fd199a8a62b3c', '01841a2e-309f-4e3a-9609-e2574695dbe3');
 INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('d69f043524094cf90f60a6c55e8c3cfa', '01841a2e-309f-4e3a-9609-e2574695dbe3');
 INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('d69f043524094cf90f60a6c55e8c3cfa', '12578678-e523-4448-9ccb-c4ba6ef01f96');
 INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('d69f043524094cf90f60a6c55e8c3cfa', '1d528a1b-15c9-4929-b998-b70ce1333d9c');
+INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('001', '37276b55-dc6a-49d5-9ae3-271e1783d442');
+INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('001', '01841a2e-309f-4e3a-9609-e2574695dbe3');
+INSERT INTO `sys_user_roles` (`user_id`, `role_id`) VALUES ('001', '12578678-e523-4448-9ccb-c4ba6ef01f96');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
