@@ -45,7 +45,9 @@ export default {
 
             formRules: formRules,
         }
-    },
+    },icon-cloud-syncicon-cloud-sync
+    //    var iconFontList = document.querySelectorAll('.icon-twrap')
+    // Array.from(a).forEach(v => v.click())
     watch: {
         dataSource() {
             this.scrollY = this.getTableScroll();
