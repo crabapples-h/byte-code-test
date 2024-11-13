@@ -28,6 +28,7 @@ public class SysUserDTO extends BaseEntity<SysUser> {
     @Dict(dictCode = "gender")
     private Integer gender;
     private String phone;
+    private String avatar;
     private Integer age;
     // 用户状态标记 0:正常 1:禁用
     private Integer status;

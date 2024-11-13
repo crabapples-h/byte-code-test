@@ -66,6 +66,8 @@ public class UserForm extends BaseForm<SysUser> {
     @NotBlank(message = "电话不能为空", groups = {Groups.IsNotNull.class, Groups.IsAdd.class, Groups.IsEdit.class})
     private String phone;
 
+    private String avatar;
+
     @Length(max = 3)
     @NotNull(message = "年龄不能为空", groups = {Groups.IsAdd.class, Groups.IsEdit.class})
     private Integer age;

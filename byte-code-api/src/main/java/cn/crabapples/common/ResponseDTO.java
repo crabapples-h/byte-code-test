@@ -30,6 +30,7 @@ public class ResponseDTO<T> implements Serializable {
         this.returnSuccess();
     }
 
+
     private ResponseDTO(ResponseCode status, String message, T data) {
         this.status = status.getCode();
         this.message = message;
@@ -65,35 +66,48 @@ public class ResponseDTO<T> implements Serializable {
 
     /*---------------- SUCCESS -------------*/
     public ResponseDTO<T> returnSuccess() {
-        return returnSuccess(DIC.BASE_SUCCESS_MESSAGE, null);
-    }
-
-    public ResponseDTO<T> returnSuccess(T data) {
-        return returnSuccess(DIC.BASE_SUCCESS_MESSAGE, data);
+        this.status = ResponseCode.SUCCESS.getCode();
+        this.message = DIC.BASE_SUCCESS_MESSAGE;
+        return this;
     }
 
     public ResponseDTO<T> returnSuccess(String message) {
-        return returnSuccess(message, null);
-    }
-
-    public ResponseDTO<T> returnSuccess(String message, T data) {
-        return new ResponseDTO<>(ResponseCode.SUCCESS, message, data);
+        this.status = ResponseCode.SUCCESS.getCode();
+        this.message = message;
+        return this;
     }
 
 
     /*---------------- ERROR -----------------*/
-    public ResponseDTO<T> returnError(T data, String message) {
-        return new ResponseDTO<>(ResponseCode.ERROR, message);
+    public ResponseDTO<T> returnError() {
+        this.status = ResponseCode.ERROR.getCode();
+        return this;
+    }
+
+    public ResponseDTO<T> returnError(String message) {
+        this.status = ResponseCode.ERROR.getCode();
+        this.message = message;
+        return this;
     }
 
     /*---------------- AUTH_FAIL -------------*/
+    public ResponseDTO<T> returnAuthFail(String message) {
+        this.status = ResponseCode.AUTH_FAIL.getCode();
+        this.message = message;
+        return this;
+    }
+
     public ResponseDTO<T> returnAuthFail(T data, String message) {
-        return new ResponseDTO<>(ResponseCode.AUTH_FAIL, message);
+        this.status = ResponseCode.AUTH_FAIL.getCode();
+        this.message = message;
+        return this;
     }
 
     /*---------------- CUSTOM ----------------*/
     public ResponseDTO<T> returnCustom(int status, String message, T data) {
-        return new ResponseDTO<>(status, message, data);
+        this.status = status;
+        this.message = message;
+        return this;
     }
 
     @Override

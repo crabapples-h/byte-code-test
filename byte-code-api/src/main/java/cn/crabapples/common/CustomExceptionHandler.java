@@ -18,13 +18,13 @@ public class CustomExceptionHandler {
     protected ResponseDTO<Object> applicationExceptionHandler(Exception e) {
         logger.warn("XHR出现异常:[{}]", e.getMessage(), e);
         if (e instanceof HttpMessageNotReadableException) {
-            return new ResponseDTO<>().returnError(null,"参数错误");
+            return new ResponseDTO<>().returnError("参数错误");
         }
         if (e instanceof ApplicationException) {
             if (401 == ((ApplicationException) e).getCode()) {
-                return new ResponseDTO<>().returnAuthFail(null,"身份认证失败");
+                return new ResponseDTO<>().returnAuthFail("身份认证失败");
             }
         }
-        return new ResponseDTO<>().returnError(null,"操作失败:" + e.getMessage());
+        return new ResponseDTO<>().returnError("操作失败:" + e.getMessage());
     }
 }

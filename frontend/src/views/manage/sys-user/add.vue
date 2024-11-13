@@ -161,9 +161,9 @@ export default {
     this.getRoleList()
   },
   methods: {
-    submit() {
-      console.log('this.form.avatar', this.form.avatar)
-    },
+    // submit() {
+    //   console.log('this.form.avatar', this.form.avatar)
+    // },
     getRoleList() {
       this.$http.get(this.url.roleList).then(result => {
         if (result.status !== 200) {

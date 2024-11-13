@@ -43,14 +43,16 @@ public class SysUser extends BaseEntity<SysUser> {
     private String mail;
     // 电话
     private String phone;
+    // 头像
+    private String avatar;
     // 年龄
     private Integer age;
     // 年龄
     @Dict(dictCode = "gender")
     private Integer gender;
+
     // 最后操作用户
-    @LastModifiedBy
-    private String lastModifiedBy;
+    private String updateBy;
 
     @TableField(exist = false)
     private List<String> roleList;
@@ -65,7 +67,6 @@ public class SysUser extends BaseEntity<SysUser> {
     private Date createTime;
 
     // 更新时间
-    @LastModifiedDate
     @JSONField(format = "yyyy-MM-dd HH:mm:ss E")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
@@ -75,6 +76,5 @@ public class SysUser extends BaseEntity<SysUser> {
     private Integer delFlag;
 
     //创建人
-    @CreatedBy
     private String createBy;
 }

@@ -70,7 +70,7 @@ public class SystemUserController extends BaseController {
         super.validator(form, Groups.IsAdd.class);
         boolean status = userService.saveUser(form);
         log.debug("返回结果->添加用户->完成:[{}]", status);
-        return new ResponseDTO<Boolean>().returnSuccess("操作成功", status);
+        return new ResponseDTO<>(status).returnSuccess("操作成功");
     }
 
     @DeleteMapping("/del/{id}")
