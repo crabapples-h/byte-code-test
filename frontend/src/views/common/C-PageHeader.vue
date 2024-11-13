@@ -1,22 +1,31 @@
 <template>
   <a-layout-header theme="light">
     <a-row style="display: flex;align-items: center;height: 100%;">
-      <a-col :span="4">
-        <span class="title">{{ title }}</span>
+      <a-col :span="8">
+        <a-space align="center">
+          <img style="width: 100px" :src="userInfo.avatar"/>
+          <span class="title">{{ title }}</span>
+        </a-space>
       </a-col>
-      <a-col :span="3" :offset="17">
+      <a-col :span="8"></a-col>
+      <a-col :span="8" style="text-align: right">
         <a-dropdown placement="bottomCenter">
-            <span>
-              <span>{{ userInfo.name }}&nbsp;</span>
-              <a-icon type="setting"/>
-            </span>
+          <a-space>
+            <a-avatar size="small" icon="user" :src="userInfo.avatar"/>
+            <span>{{ userInfo.name }}</span>
+            <a-icon type="setting"/>
+          </a-space>
           <a-menu slot="overlay">
-            <a-menu-item key="1" @click="showUpdatePassword">
+            <a-menu-item key="3" @click="showUpdatePassword">
               <a-icon type="user"/>
+              个人资料
+            </a-menu-item>
+            <a-menu-item key="1" @click="showUpdatePassword">
+              <a-icon type="lock"/>
               修改密码
             </a-menu-item>
             <a-menu-item key="2" @click="logout">
-              <a-icon type="close"/>
+              <a-icon type="logout"/>
               退出登录
             </a-menu-item>
           </a-menu>
@@ -142,7 +151,7 @@ export default {
 @import "~@public/color.less";
 
 .title {
-  font-size: 20px;
+  font-size: 28px;
   color: #fff;
   font-weight: 700;
 }

@@ -74,6 +74,17 @@ public class SystemMenuController extends BaseController {
 
 
     /**
+     * 获取[角色]菜单树
+     */
+    @GetMapping("/tree/role/{id}")
+    public ResponseDTO<List<SysMenu>> getRoleMenusTree(@PathVariable String id) {
+        log.info("收到请求->获取[角色]菜单列表:[{}]", id);
+        List<SysMenu> list = roleMenusService.getRoleMenusTree(id);
+        log.debug("返回结果->获取[角色]菜单列表成功:[{}]", list);
+        return new ResponseDTO<>(list);
+    }
+
+      /**
      * 获取[角色]菜单列表
      */
     @GetMapping("/role/{id}")
@@ -99,7 +110,7 @@ public class SystemMenuController extends BaseController {
     /**
      * 删除菜单
      */
-    @PostMapping("/remove/{id}")
+    @DeleteMapping("/remove/{id}")
     public ResponseDTO<Boolean> removeMenus(@PathVariable String id) {
         log.info("收到请求->删除菜单:[{}]", id);
         boolean status = menusService.removeMenus(id);

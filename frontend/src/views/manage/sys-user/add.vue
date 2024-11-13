@@ -1,5 +1,5 @@
 <template>
-  <a-drawer :title="title" width="30%" :visible="visible" @close="closeForm">
+  <a-drawer :title="title" width="30%" :visible="visible" @close="closeForm" :destroy-on-close="true">
     <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
       <a-form-model-item label="id" prop="id" style="display: none">
         <a-input v-model="form.id" disabled placeholder="新建时自动生成"/>
@@ -66,6 +66,7 @@ export default {
   },
   watch: {
     visible(nowValue, oldValue) {
+      console.log('visible', this.form)
       if (nowValue && this.isEdit) {
         this.loadUserRoles()
       }

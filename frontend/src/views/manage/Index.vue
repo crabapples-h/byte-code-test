@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      title: '管理',
+      title: '后台管理系统',
       userInfo: {},
       theme: 'light',
       showFooter: false
