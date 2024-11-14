@@ -43,41 +43,20 @@ public class ServerSentEventController {
             sseEmitter.onCompletion(() -> SSE_CLENT_MAP.remove(id));
             SSE_CLENT_MAP.put(id, sseEmitter);
         }
-        SseEmitter finalSseEmitter = sseEmitter;
-        new Thread(() -> {
-            try {
-
-                for (int i = 0; i < 20; i++) {
-                    TimeUnit.SECONDS.sleep(1);
-                    JSONObject object = new JSONObject();
-                    object.put("data", String.format("第[%d]次消息推送", i));
-                    SseEmitter.SseEventBuilder sseEventBuilder = SseEmitter.event();
-                    SseEmitter.SseEventBuilder data = sseEventBuilder
-                            .name("log")
-                            .data(object);
-                    finalSseEmitter.send(data);
-//                    finalSseEmitter.send(String.format("第[%d]次消息推送", i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
         return sseEmitter;
     }
 
-    @RequestMapping("/send")
-    public void sseTestSend(String id) throws IOException {
+    @RequestMapping("/send/{id}")
+    public void sseTestSend(@PathVariable String id) throws IOException, InterruptedException {
         SseEmitter sseEmitter = SSE_CLENT_MAP.get(id);
         log.info("sse测试发送消息,id:[{}],[{}]", id, sseEmitter);
-        System.err.println(sseEmitter);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             SseEmitter.SseEventBuilder sseEventBuilder = SseEmitter.event();
+            TimeUnit.SECONDS.sleep(1);
             sseEventBuilder
                     .name("log")
                     .data(String.format("第[%d]次消息推送", i));
             sseEmitter.send(sseEventBuilder);
-//        sseEmitter.send(String.format("第[%d]次消息推送", 1));
         }
-        return;
     }
 }

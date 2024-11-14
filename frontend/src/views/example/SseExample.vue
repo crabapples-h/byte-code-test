@@ -19,8 +19,8 @@ export default {
   data() {
     return {
       url: {
-        // sse: '/api/sse/connect',
-        sse: '/videoability/chargingStation/api/sse/connect',
+        sse: '/api/sse/connect',
+        // sse: '/videoability/chargingStation/api/sse/connect',
         test: '/api/sse/send',
       },
       clientId: '',
@@ -53,7 +53,7 @@ export default {
         this.disable = false;
         // sse.close();
       });
-      // this.testSend()
+      this.testSend()
     },
     connect1() {
       // this.clientId = Math.floor(Math.random() * 10000000).toString()
