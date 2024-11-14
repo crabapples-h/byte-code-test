@@ -1,7 +1,7 @@
 package cn.crabapples.system.system.controller;
 
-import cn.crabapples.common.Groups;
-import cn.crabapples.common.ResponseDTO;
+import cn.crabapples.common.utils.Groups;
+import cn.crabapples.common.base.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
 import cn.crabapples.common.jwt.JwtIgnore;
 import cn.crabapples.system.sysUser.entity.SysUser;

@@ -1,6 +1,6 @@
 package cn.crabapples.system.sysUser.service.impl;
 
-import cn.crabapples.common.ApplicationException;
+import cn.crabapples.common.base.ApplicationException;
 import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.utils.AssertUtils;
 import cn.crabapples.system.dto.SysUserDTO;

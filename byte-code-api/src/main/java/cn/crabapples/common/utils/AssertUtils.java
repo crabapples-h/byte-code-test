@@ -1,6 +1,6 @@
 package cn.crabapples.common.utils;
 
-import cn.crabapples.common.ApplicationException;
+import cn.crabapples.common.base.ApplicationException;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;

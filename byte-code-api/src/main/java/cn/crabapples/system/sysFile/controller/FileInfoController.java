@@ -1,8 +1,7 @@
 package cn.crabapples.system.sysFile.controller;
 
-import cn.crabapples.common.ResponseDTO;
+import cn.crabapples.common.base.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
-import cn.crabapples.common.jwt.JwtIgnore;
 import cn.crabapples.system.sysFile.entity.FileInfo;
 import cn.crabapples.system.sysFile.service.FileInfoService;
 import lombok.extern.slf4j.Slf4j;

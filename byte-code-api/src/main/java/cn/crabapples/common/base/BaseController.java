@@ -1,6 +1,5 @@
 package cn.crabapples.common.base;
 
-import cn.crabapples.common.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolation;

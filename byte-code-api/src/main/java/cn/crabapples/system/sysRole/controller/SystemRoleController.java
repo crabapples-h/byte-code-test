@@ -1,6 +1,6 @@
 package cn.crabapples.system.sysRole.controller;
 
-import cn.crabapples.common.ResponseDTO;
+import cn.crabapples.common.base.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
 import cn.crabapples.system.dto.SysRolesDTO;
 import cn.crabapples.system.sysRole.entity.SysRole;

@@ -1,9 +1,8 @@
-package cn.crabapples.common;
+package cn.crabapples.common.base;
 
 import cn.crabapples.common.dic.DIC;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
 package cn.crabapples.system.sysUser.form;
 
-import cn.crabapples.common.Groups;
+import cn.crabapples.common.utils.Groups;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;

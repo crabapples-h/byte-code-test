@@ -1,13 +1,11 @@
 package cn.crabapples.system.sysUser.form;
 
-import cn.crabapples.common.Groups;
+import cn.crabapples.common.utils.Groups;
 import cn.crabapples.common.base.BaseForm;
 import cn.crabapples.system.sysUser.entity.SysUser;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 

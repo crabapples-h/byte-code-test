@@ -1,4 +1,4 @@
-package cn.crabapples.common;//package cn.crabapples.common;
+package cn.crabapples.common.base;//package cn.crabapples.common;
 //
 //import com.alibaba.fastjson2.JSONObject;
 //import lombok.Getter;

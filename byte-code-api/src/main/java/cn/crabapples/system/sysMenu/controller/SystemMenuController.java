@@ -1,7 +1,7 @@
 package cn.crabapples.system.sysMenu.controller;
 
-import cn.crabapples.common.Groups;
-import cn.crabapples.common.ResponseDTO;
+import cn.crabapples.common.utils.Groups;
+import cn.crabapples.common.base.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
 import cn.crabapples.system.sysMenu.entity.SysMenu;
 import cn.crabapples.system.sysMenu.form.MenusForm;

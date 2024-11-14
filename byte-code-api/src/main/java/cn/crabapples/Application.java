@@ -20,6 +20,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 
@@ -53,6 +54,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 })
 @ComponentScan(basePackages = {"cn.crabapples"})
 @EnableAspectJAutoProxy
+@EnableWebSocket
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
@@ -60,10 +62,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
         logger.info(">>>>>>>>SpringBoot服务启动成功 [jwt] >>>>>>>>>");
     }
-//    @Bean
-//	public ServerEndpointExporter serverEndpointExporter() {
-//		return new ServerEndpointExporter();
-//	}
 
     @Bean
     public RestTemplate restTemplate() {
@@ -78,18 +76,6 @@ public class Application {
 
     }
 
-    /**
-     * 设置SSE请求异步超时时间
-     *
-     * @return
-     */
-//    @Bean
-//    public EmbeddedServletContainerFactory servletContainer() {
-//        TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
-//        factory.addConnectorCustomizers(connector -> connector.setAsyncTimeout(600_000_000));
-//        return factory;
-//
-//    }
 //    @Bean
 //    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
 //        return factory -> factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/index.html"));

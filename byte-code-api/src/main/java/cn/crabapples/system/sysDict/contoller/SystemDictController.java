@@ -1,6 +1,6 @@
 package cn.crabapples.system.sysDict.contoller;
 
-import cn.crabapples.common.ResponseDTO;
+import cn.crabapples.common.base.ResponseDTO;
 import cn.crabapples.common.base.BaseController;
 import cn.crabapples.system.sysDict.entity.SysDict;
 import cn.crabapples.system.sysDict.entity.SysDictItem;
