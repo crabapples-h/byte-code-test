@@ -34,7 +34,7 @@ public interface SystemUserService extends BaseService {
 
     List<SysUserDTO> findAll(UserForm form);
 
-    boolean delUser(String id);
+    boolean removeUser(String id);
 
     boolean lockUser(String id);
 

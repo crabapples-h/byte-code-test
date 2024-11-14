@@ -1,6 +1,6 @@
 <template>
   <a-modal :visible="visible" width="50%" ok-text="确认" cancel-text="取消" @ok="submit" @cancel="closeForm">
-    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="form">
+    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
       <a-form-model-item label="字典项文字" prop="text">
         <a-input v-model="form.text"/>
       </a-form-model-item>
@@ -65,7 +65,7 @@ export default {
       this.$emit('cancel')
     },
     submit() {
-      this.$refs.form.validate(valid => {
+      this.$refs.ruleForm.validate(valid => {
         if (valid) {
           this.form.dictCode = this.dictCode
           this.$http.post(this.url.save, this.form).then(result => {

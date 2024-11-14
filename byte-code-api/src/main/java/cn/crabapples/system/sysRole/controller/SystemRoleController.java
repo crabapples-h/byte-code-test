@@ -94,7 +94,7 @@ public class SystemRoleController extends BaseController {
     /**
      * 删除角色
      */
-    @PostMapping("/remove/{id}")
+    @DeleteMapping("/remove/{id}")
     public ResponseDTO<Object> removeRoles(@PathVariable String id) {
         log.info("收到请求->删除角色:[{}]", id);
         rolesService.removeRoles(id);

@@ -1,10 +1,7 @@
 <template>
   <a-modal :visible="visible" width="50%" ok-text="确认" cancel-text="取消" @ok="submit" @cancel="closeForm">
-
-    <c-icon-select :visible="show.extend" @closeExtend="closeExtend" title="选择图标" v-model="form.icon"/>
-
+<!--    <c-icon-select :visible="show.extend" @closeExtend="closeExtend" title="选择图标" v-model="form.icon"/>-->
     <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
-
       <a-form-model-item label="ID" style="display: none">
         <a-input v-model="form.id" disabled placeholder="新建时自动生成"/>
       </a-form-model-item>
@@ -18,7 +15,6 @@
             <use :xlink:href="'#icon-'+form.icon"></use>
           </svg>
           <a-button @click="showExtend" ghost type="primary" size="small">选择图标</a-button>
-
         </a-space>
       </a-form-model-item>
       <a-form-model-item label="排序" prop="sort" v-if="form.menusType === 1">

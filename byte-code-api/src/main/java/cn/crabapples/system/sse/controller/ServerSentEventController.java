@@ -1,15 +1,9 @@
 package cn.crabapples.system.sse.controller;
 
-import cn.crabapples.common.ResponseDTO;
-import cn.crabapples.common.dic.EnableDict;
-import cn.crabapples.common.jwt.JwtIgnore;
-import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
@@ -32,7 +26,7 @@ public class ServerSentEventController {
     private static final Map<String, SseEmitter> SSE_CLENT_MAP = new ConcurrentHashMap<>();
 
     @RequestMapping(value = "/connect/{id}")
-    @JwtIgnore
+//    @JwtIgnore
     public SseEmitter connectSse(@PathVariable String id) {
         log.info("收到sse请求,id:[{}]", id);
         SseEmitter sseEmitter = SSE_CLENT_MAP.get(id);

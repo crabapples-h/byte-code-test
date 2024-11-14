@@ -1,7 +1,7 @@
 <template>
   <a-modal :visible="visible" width="50%" ok-text="确认" cancel-text="取消" @ok="submit"
            @cancel="closeForm">
-    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="form">
+    <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
       <a-form-model-item label="ID" style="display: none">
         <a-input v-model="form.id" disabled placeholder="新建字典时自动生成"/>
       </a-form-model-item>

@@ -39,8 +39,10 @@
                           v-if="record.status === 0" v-auth:sys:user:lock/>
             <c-pop-button title="确认要解锁吗" text="解锁" @click="unlockUser(record)"
                           v-if="record.status === 1" v-auth:sys:user:unlock/>
+            <a-button @click="showChangePassword(record)" v-auth:sys:user:change-password size="small">
+              重置密码
+            </a-button>
             <c-pop-button title="确认要删除吗" text="删除" @click="remove(record)" type="danger" v-auth:sys:user:del/>
-            <a-button @click="showChangePassword(record)" v-auth:sys:user:change-password>重置密码</a-button>
           </template>
         </a-space>
       </template>

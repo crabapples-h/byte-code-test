@@ -46,7 +46,7 @@ public class SystemDictController extends BaseController {
         return new ResponseDTO<>(status);
     }
 
-    @PostMapping("/remove/{id}")
+    @DeleteMapping("/remove/{id}")
 //    @ApiOperation(value = "系统字典", notes = "删除系统字典接口")
     public ResponseDTO<Boolean> deleteById(@PathVariable String id) {
         log.info("收到请求->删除系统字典:[{}]", id);
@@ -83,7 +83,7 @@ public class SystemDictController extends BaseController {
         return new ResponseDTO<>(list);
     }
 
-    @PostMapping("/item/remove/{id}")
+    @DeleteMapping("/item/remove/{id}")
 //    @ApiOperation(value = "系统字典", notes = "删除系统字典接口")
     public ResponseDTO<Boolean> deleteItemById(@PathVariable String id) {
         log.info("收到请求->删除系统字典项:[{}]", id);

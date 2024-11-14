@@ -39,8 +39,10 @@ instance.interceptors.response.use(response => {
         }
         // 服务器状态码不是200
         if (response.data.status !== 200) {
-            console.log("接口出现异常", response)
-            notification.warn({message: response.data.message})
+            if (response.data) {
+                console.log("接口出现异常", response)
+                notification.warn({message: response.data.message})
+            }
         }
         return response.status === 200 ? Promise.resolve(data) : Promise.reject(data)
     },

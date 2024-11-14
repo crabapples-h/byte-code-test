@@ -61,7 +61,7 @@ export default {
       },
       url: {
         list: SysApis.rolePage,
-        delete: SysApis.delRoles,
+        remove: SysApis.delRoles,
       },
       detailId: '',
       title: '标题',

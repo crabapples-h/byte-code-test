@@ -107,12 +107,6 @@ export default {
   mounted() {
   },
   methods: {
-    iconHandler(text) {
-      if (text) {
-        return text.substring(text.indexOf("\"") + 1, text.lastIndexOf("\""))
-      }
-      return "setting-fill"
-    },
     getList() {
       let page = this.getQueryPage()
       this.$http.get(this.url.list, {params: page}).then(result => {
@@ -123,24 +117,10 @@ export default {
         if (result.data !== null) {
           let format = function (data) {
             return data.map(e => {
-              let menus = {
-                id: e.id,
-                key: e.id,
-                name: e.name,
-                icon: e.icon,
-                url: e.path,
-                sort: e.sort,
-                menusType: e.menusType,
-                path: e.path,
-                link: e.link,
-                filePath: e.filePath,
-                permission: e.permission,
-                showFlag: e.showFlag,
-              }
               if (e.children && e.children.length > 0) {
-                menus.children = format(e.children)
+                e.children = format(e.children)
               }
-              return menus
+              return e
             }).sort((a, b) => {
               return a.sort - b.sort
             })

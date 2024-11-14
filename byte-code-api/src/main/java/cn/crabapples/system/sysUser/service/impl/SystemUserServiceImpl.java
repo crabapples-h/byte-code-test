@@ -4,7 +4,6 @@ import cn.crabapples.common.ApplicationException;
 import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.utils.AssertUtils;
 import cn.crabapples.system.dto.SysUserDTO;
-import cn.crabapples.system.sysMenu.dao.SystemMenusDAO;
 import cn.crabapples.system.sysUser.dao.UserDAO;
 import cn.crabapples.system.sysUser.entity.SysUser;
 import cn.crabapples.system.sysUser.form.ResetPasswordForm;
@@ -120,8 +119,8 @@ public class SystemUserServiceImpl implements SystemUserService {
      * 删除用户
      */
     @Override
-    public boolean delUser(String id) {
-        return userDAO.delUser(id);
+    public boolean removeUser(String id) {
+        return userDAO.removeUser(id);
     }
 
     /**

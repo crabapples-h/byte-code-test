@@ -59,7 +59,7 @@ public class UserDAO extends ServiceImpl<UserMapper, SysUser> {
         return baseMapper.selectBatchIds(ids);
     }
 
-    public boolean delUser(String id) {
+    public boolean removeUser(String id) {
         return removeById(id);
     }
 
