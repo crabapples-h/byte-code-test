@@ -40,9 +40,9 @@ import org.springframework.web.client.RestTemplate;
  * springCloud 使用bootstrap配置文件
  */
 
-@SpringBootApplication
-//@SpringBootConfiguration
-//@EnableAutoConfiguration
+//@SpringBootApplication
+@SpringBootConfiguration
+@EnableAutoConfiguration
 
 //mybatis扫描路径(如果使用注解的方式可不用配置)
 @MapperScans({
@@ -50,7 +50,7 @@ import org.springframework.web.client.RestTemplate;
         @MapperScan("cn.crabapples.system.*.dao.mybatis.mapper"),
 //        @MapperScan("cn.crabapples.custom.*.dao.mybatis.mapper")
 })
-//@ComponentScan(basePackages = {"cn.crabapples"})
+@ComponentScan(basePackages = {"cn.crabapples"})
 @EnableAspectJAutoProxy
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);

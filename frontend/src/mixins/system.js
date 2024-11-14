@@ -30,7 +30,7 @@ export default {
             wrapperCol: {span: 16},
             pagination: initCPagination(this.changeIndex, this.changeSize),
             headers: {
-                'crabapples-token': sessionStorage.getItem('crabapples-token'),
+                'crabapples-token': this.$store.getters.TOKEN,
             },
             sysUser: sessionStorage.getItem("sysUser"),
             uploadUrl: '/api/uploadFile',
@@ -145,6 +145,7 @@ export default {
             this.$refs.ruleForm.validate(valid => {
                 if (valid) {
                     _this.$http.post(this.url.save, _this.form).then(result => {
+                        console.log(result)
                         if (result.status !== 200) {
                             _this.$message.error(result.message);
                             return;

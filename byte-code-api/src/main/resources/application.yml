@@ -19,6 +19,10 @@ spring.profiles.active: dev
 
 mybatis-plus.mapper-locations: classpath*:mapper/*.xml,classpath*:cn/crabapples/system/**/dao/mybatis/xml/*.xml
 logging.file.name: logs/springboot-jwt/
+#出现错误时, 直接抛出异常
+#spring.mvc.throw-exception-if-no-handler-found: true
+#不要为我们工程中的资源文件建立映射
+#spring.web.resources.add-mappings: false
 
 
 

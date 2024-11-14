@@ -16,6 +16,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -62,14 +63,19 @@ public class DictAspect {
     public void dictService() {
     }
 
-    @Around("dictService()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+//    @Around("dictService()")
+    public Object doAround(ProceedingJoinPoint point) throws Throwable {
+//        MethodSignature methodSignature = (MethodSignature) point.getSignature();
+//        EnableDict annotation = methodSignature.getMethod().getAnnotation(EnableDict.class);
+//        System.err.println(annotation);
         long time1 = System.currentTimeMillis();
-        Object result = pjp.proceed();
+        Object result = point.proceed();
         long time2 = System.currentTimeMillis();
         log.info("获取JSON数据 耗时：" + (time2 - time1) + "ms");
         long start = System.currentTimeMillis();
-        result = this.parseDictText(result);
+        if (result instanceof ResponseDTO) {
+            result = this.parseDictText(result);
+        }
         long end = System.currentTimeMillis();
         log.info("注入字典到JSON数据  耗时" + (end - start) + "ms");
         return result;

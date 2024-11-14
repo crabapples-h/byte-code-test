@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -62,14 +63,14 @@ public class SysMenu extends BaseEntity<SysMenu> {
     private String createBy;
 
     // 创建时间
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss E", serialize = false)
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss", serialize = false)
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
     // 更新时间
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss E", serialize = false)
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss", serialize = false)
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     // 删除标记 (0:正常 1:删除)
     @TableLogic

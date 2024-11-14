@@ -17,7 +17,7 @@
           <svg class="iconfont" aria-hidden="true" style="width: 50px;height: 50px" v-if="form.icon">
             <use :xlink:href="'#icon-'+form.icon"></use>
           </svg>
-          <a-button @click="showExtend">选择图标</a-button>
+          <a-button @click="showExtend" ghost type="primary" size="small">选择图标</a-button>
 
         </a-space>
       </a-form-model-item>
@@ -98,7 +98,8 @@ export default {
         ],
         path: [
           {required: true, message: '请输入浏览器访问路径', trigger: 'change'},
-          {whitespace: true, message: '请输入浏览器访问路径', trigger: 'change'}
+          {whitespace: true, message: '请输入浏览器访问路径', trigger: 'change'},
+          {validator: this.checkStartChar, message: '必须以/开头', trigger: 'change'},
         ],
         link: [
           {required: true, message: '请输入超链接地址', trigger: 'change'},
@@ -114,7 +115,15 @@ export default {
   },
   mounted() {
   },
-  methods: {}
+  methods: {
+    checkStartChar(rule, value, callback) {
+      if (!value.startsWith("/")) {
+        callback(new Error('必须以/开头'))
+        return
+      }
+      callback()
+    },
+  }
 }
 </script>
 

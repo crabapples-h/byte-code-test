@@ -30,9 +30,15 @@ public class ResponseDTO<T> implements Serializable {
         this.returnSuccess();
     }
 
+    public ResponseDTO(T data) {
+        this.status = ResponseCode.SUCCESS.getCode();
+        this.message = DIC.BASE_SUCCESS_MESSAGE;
+        this.data = data;
+        this.time = System.currentTimeMillis();
+    }
 
-    private ResponseDTO(ResponseCode status, String message, T data) {
-        this.status = status.getCode();
+    public ResponseDTO(String message, T data) {
+        this.status = ResponseCode.SUCCESS.getCode();
         this.message = message;
         this.data = data;
         this.time = System.currentTimeMillis();
@@ -44,18 +50,13 @@ public class ResponseDTO<T> implements Serializable {
         this.time = System.currentTimeMillis();
     }
 
-    public ResponseDTO(T data) {
-        this.status = ResponseCode.SUCCESS.getCode();
-        this.data = data;
-        this.time = System.currentTimeMillis();
-    }
-
-    public ResponseDTO(String message, T data) {
-        this.status = ResponseCode.SUCCESS.getCode();
+    private ResponseDTO(ResponseCode status, String message, T data) {
+        this.status = status.getCode();
         this.message = message;
         this.data = data;
         this.time = System.currentTimeMillis();
     }
+
 
     public ResponseDTO(int code, String message, T data) {
         this.status = code;

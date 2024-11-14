@@ -24,7 +24,6 @@
         </a-space>
       </span>
       <span slot="icon" slot-scope="text, record">
-<!--        <a-icon :type='iconHandler(text)'/>-->
            <svg class="iconfont" aria-hidden="true" style="width: 50px;height: 50px">
             <use :xlink:href="'#icon-'+text"></use>
           </svg>
@@ -99,7 +98,7 @@ export default {
       },
       url: {
         list: SysApis.menuPage,
-        delete: SysApis.delMenus,
+        remove: SysApis.delMenus,
       }
     }
   },

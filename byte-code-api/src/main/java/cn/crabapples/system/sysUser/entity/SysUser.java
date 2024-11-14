@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -61,15 +62,14 @@ public class SysUser extends BaseEntity<SysUser> {
     private Integer status;
 
     // 创建时间
-    @CreatedDate
     @JSONField(format = "yyyy-MM-dd HH:mm:ss E")
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
     // 更新时间
     @JSONField(format = "yyyy-MM-dd HH:mm:ss E")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     // 删除标记 (0:正常 1:删除)
     @TableLogic

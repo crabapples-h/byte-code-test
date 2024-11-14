@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -49,13 +50,13 @@ public class SysRole extends BaseEntity<SysRole> {
     @CreatedDate
     @JSONField(format = "yyyy-MM-dd HH:mm:ss E", serialize = false)
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
     // 更新时间
     @LastModifiedDate
     @JSONField(format = "yyyy-MM-dd HH:mm:ss E", serialize = false)
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     // 删除标记 (0:正常 1:删除)
     @TableLogic
