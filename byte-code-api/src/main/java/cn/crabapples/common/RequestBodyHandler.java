@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
  */
 //@Component
 //@ControllerAdvice
-public class HttpBodyHandler implements RequestBodyAdvice {
+public class RequestBodyHandler implements RequestBodyAdvice {
     @Value("${crypt:false}")
     private boolean crypt;
 

@@ -63,7 +63,7 @@ public class DictAspect {
     public void dictService() {
     }
 
-//    @Around("dictService()")
+    @Around("dictService()")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
 //        MethodSignature methodSignature = (MethodSignature) point.getSignature();
 //        EnableDict annotation = methodSignature.getMethod().getAnnotation(EnableDict.class);

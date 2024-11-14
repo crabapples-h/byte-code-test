@@ -10,7 +10,7 @@
 </template>
 
 <script>
-// import {NativeEventSource, EventSourcePolyfill} from 'event-source-polyfill';
+import {NativeEventSource, EventSourcePolyfill} from 'event-source-polyfill';
 import system from '@/mixins/system'
 
 export default {
@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       url: {
-        sse: '/api/sse/connect',
+        // sse: '/api/sse/connect',
+        sse: '/videoability/chargingStation/api/sse/connect',
         test: '/api/sse/send',
       },
       clientId: '',

@@ -73,12 +73,24 @@ public class Application {
 
     }
 
-    @Bean
-    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
-        return factory -> factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/index.html"));
-    }
-
+    /**
+     * 设置SSE请求异步超时时间
+     *
+     * @return
+     */
 //    @Bean
+//    public EmbeddedServletContainerFactory servletContainer() {
+//        TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
+//        factory.addConnectorCustomizers(connector -> connector.setAsyncTimeout(600_000_000));
+//        return factory;
+//
+//    }
+//    @Bean
+//    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+//        return factory -> factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/index.html"));
+//    }
+
+    //    @Bean
     public WebServerFactoryCustomizer containerCustomizer() {
         return (WebServerFactoryCustomizer<ConfigurableWebServerFactory>) factory -> {
             // 对嵌入式servlet容器的配置

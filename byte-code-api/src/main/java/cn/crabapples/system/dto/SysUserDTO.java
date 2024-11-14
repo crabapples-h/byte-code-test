@@ -34,10 +34,10 @@ public class SysUserDTO extends BaseEntity<SysUser> {
     // 用户状态标记 0:正常 1:禁用
     private Integer status;
     // 创建时间
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss E")
     private LocalDateTime createTime;
     // 更新时间
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss E")
     private LocalDateTime updateTime;
     //创建人
     private String createBy;

@@ -19,7 +19,7 @@ public class FastJson2Configure {
     @Bean
     public FastJsonConfig fastJsonConfig() {
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss E");
+        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastJsonConfig.setWriterFeatures(JSONWriter.Feature.WriteNullListAsEmpty);
         fastJsonConfig.setWriterFeatures(JSONWriter.Feature.WriteNullStringAsEmpty);
         fastJsonConfig.setWriterFeatures(JSONWriter.Feature.WriteNulls);

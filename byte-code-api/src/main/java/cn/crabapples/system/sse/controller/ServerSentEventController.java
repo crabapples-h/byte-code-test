@@ -6,10 +6,7 @@ import cn.crabapples.common.jwt.JwtIgnore;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * qq 294046317
  * pc-name admin
  */
-@Controller
+@RestController
 @RequestMapping("/api/sse")
 @Slf4j
 public class ServerSentEventController {
@@ -51,6 +48,7 @@ public class ServerSentEventController {
             try {
 
                 for (int i = 0; i < 20; i++) {
+                    TimeUnit.SECONDS.sleep(1);
                     JSONObject object = new JSONObject();
                     object.put("data", String.format("第[%d]次消息推送", i));
                     SseEmitter.SseEventBuilder sseEventBuilder = SseEmitter.event();
@@ -58,7 +56,6 @@ public class ServerSentEventController {
                             .name("log")
                             .data(object);
                     finalSseEmitter.send(data);
-                    TimeUnit.SECONDS.sleep(1);
 //                    finalSseEmitter.send(String.format("第[%d]次消息推送", i));
                 }
             } catch (Exception e) {
