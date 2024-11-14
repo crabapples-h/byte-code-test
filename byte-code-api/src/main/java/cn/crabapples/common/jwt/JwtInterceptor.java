@@ -52,7 +52,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             log.warn("token认证失败");
             throw new ApplicationException("登录信息异常", 401);
         }
-        String userId = jwtTokenUtils.parseToken(token);
+        String userId = jwtTokenUtils.getUserId(token);
         log.debug("token所属用户:[{}]", userId);
         return true;
     }

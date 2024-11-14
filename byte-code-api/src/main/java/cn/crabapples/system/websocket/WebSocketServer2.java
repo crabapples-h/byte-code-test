@@ -23,12 +23,17 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Configuration
 public class WebSocketServer2 implements WebSocketConfigurer {
+    private final AuthHandshakeInterceptor authHandshakeInterceptor;
     public static final ConcurrentHashMap<String, WebSocketSession> WEB_SOCKET_CLIENT = new ConcurrentHashMap<>(16);
+
+    public WebSocketServer2(AuthHandshakeInterceptor authHandshakeInterceptor) {
+        this.authHandshakeInterceptor = authHandshakeInterceptor;
+    }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new WebSocketHandlerImpl(), "/ws/**")
-                .addInterceptors(new AuthHandshakeInterceptor()) // 添加自定义拦截器
+        registry.addHandler(new WebSocketHandlerImpl(), "/ws/*")
+                .addInterceptors(authHandshakeInterceptor) // 添加自定义拦截器
                 .setAllowedOrigins("*"); // 允许的跨域来源
     }
 
@@ -37,16 +42,16 @@ public class WebSocketServer2 implements WebSocketConfigurer {
 
         @Override
         public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-            String id = (String) session.getAttributes().get("id");
-            log.info("websocket连接成功,连接方式[{}],客户端ID:[{}]", "配置", id);
-            WEB_SOCKET_CLIENT.put(id, session);
+            String clientId = (String) session.getAttributes().get("clientId");
+            log.info("websocket连接成功,连接方式[{}],客户端ID:[{}]", "配置", clientId);
+            WEB_SOCKET_CLIENT.put(clientId, session);
         }
 
         @Override
         public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
             // 处理 WebSocket 消息
-            String id = (String) session.getAttributes().get("id");
-            SocketMessageSender.sendMessage2(message, id);
+            String clientId = (String) session.getAttributes().get("clientId");
+            SocketMessageSender.sendMessage2(message, clientId);
 //            session.sendMessage(new TextMessage("Hello, " + session.getAttributes().get("user")));
         }
 

@@ -1,13 +1,20 @@
 package cn.crabapples.common.websocket;
 
+import cn.crabapples.common.base.ApplicationException;
+import cn.crabapples.common.jwt.JwtTokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -23,52 +30,55 @@ import java.util.Objects;
  * pc-name mshe
  */
 @Slf4j
+@Component
 public class AuthHandshakeInterceptor implements HandshakeInterceptor {
+
+    private final JwtTokenUtils jwtTokenUtils;
+
+    public AuthHandshakeInterceptor(JwtTokenUtils jwtTokenUtils) {
+        this.jwtTokenUtils = jwtTokenUtils;
+    }
+
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         HttpHeaders headers = request.getHeaders();
+        URI uri = request.getURI();
+        String path = uri.getPath();
+        String clientId = path.replaceFirst("/ws/", "");
         List<String> tokenList = headers.get("sec-websocket-protocol");
         headers.remove("sec-websocket-protocol");
         if (Objects.nonNull(tokenList) && !tokenList.isEmpty()) {
             String token = tokenList.get(0);
             // 检查 Token 是否存在，并进行验证
-            if (validateToken(token)) {
+            if (null != token) {
                 // Token 验证通过，可以将用户信息添加到 WebSocket session attributes 中
-                attributes.put("user", getUserFromToken(token));
+                try {
+                    String userId = jwtTokenUtils.getUserId(token);
+                    String username = jwtTokenUtils.getUserName(token);
+                    attributes.put("clientId", clientId);
+                    attributes.put("userId", userId);
+                    attributes.put("username", username);
+                } catch (ApplicationException e) {
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                    return false;
+                }
                 response.getHeaders().put("sec-websocket-protocol", Collections.singletonList(token));
                 // 允许握手
                 return true;
             } else {
                 // Token 验证失败，拒绝握手
                 response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                return true;
-//                return false;
+                return false;
             }
         }
-        return true;
-//        return false;
+        return false;
     }
 
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler
             wsHandler, Exception exception) {
         // 握手完成后的处理逻辑（可以留空）
-    }
-
-    // 验证 Token 的方法
-    private boolean validateToken(String token) {
-        if (token != null) {
-            // 在这里实现 Token 验证逻辑，例如调用认证服务或者解析 JWT
-            return true; // 示例：直接比较字符串（实际应用中应使用更复杂的逻辑）
-        }
-        return false;
-    }
-
-    // 从 Token 中获取用户信息的方法
-    private String getUserFromToken(String token) {
-        // 解析 Token，提取用户信息
-        return "username"; // 示例：直接返回用户名（实际应用中应根据 Token 获取用户信息）
     }
 
 }

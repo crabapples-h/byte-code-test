@@ -1,5 +1,6 @@
 package cn.crabapples.system.websocket;
 
+import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.websocket.EndPointConfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint(value = "/websocket/{id}", configurator = EndPointConfigure.class)
 public class WebSocketServer {
 
+
     public static final ConcurrentHashMap<String, Session> WEB_SOCKET_CLIENT = new ConcurrentHashMap<>(16);
+
 
 
     /**
@@ -35,6 +38,11 @@ public class WebSocketServer {
     @OnOpen
     public void onOpen(Session session, @PathParam("id") String id) throws IOException {
         WEB_SOCKET_CLIENT.put(id, session);
+//        String userId = jwtTokenUtils.getUserId(token);
+//        String username = jwtTokenUtils.getUserName(token);
+//        attributes.put("clientId", clientId);
+//        attributes.put("userId", userId);
+//        attributes.put("username", username);
         log.info("WebSocket连接成功,客户端ID:[{}],当前连接数量:[{}]", id, WEB_SOCKET_CLIENT.size());
         SocketMessageSender.sendMessage("连接成功", id);
     }
