@@ -20,6 +20,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 
 /**
@@ -59,6 +60,10 @@ public class Application {
         SpringApplication.run(Application.class, args);
         logger.info(">>>>>>>>SpringBoot服务启动成功 [jwt] >>>>>>>>>");
     }
+//    @Bean
+//	public ServerEndpointExporter serverEndpointExporter() {
+//		return new ServerEndpointExporter();
+//	}
 
     @Bean
     public RestTemplate restTemplate() {

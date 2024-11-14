@@ -1,4 +1,4 @@
-package cn.crabapples.common.aop;
+package cn.crabapples.common.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

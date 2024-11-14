@@ -27,7 +27,6 @@ public class FileInfoController extends BaseController {
     }
 
     @PostMapping("/uploadFile")
-    @JwtIgnore
     public ResponseDTO<FileInfo> uploadFile(HttpServletRequest request) {
         log.info("收到请求->上传文件");
         FileInfo entity = fileInfoService.uploadFile(request);
@@ -36,7 +35,6 @@ public class FileInfoController extends BaseController {
     }
 
     @PostMapping("/uploadFileV2")
-    @JwtIgnore
     public ResponseDTO<String> uploadFileV2(HttpServletRequest request) {
         log.info("收到请求->上传文件");
         FileInfo entity = fileInfoService.uploadFile(request);

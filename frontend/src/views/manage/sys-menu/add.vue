@@ -1,6 +1,7 @@
 <template>
-  <a-modal :visible="visible" width="50%" ok-text="确认" cancel-text="取消" @ok="submit" @cancel="closeForm">
-<!--    <c-icon-select :visible="show.extend" @closeExtend="closeExtend" title="选择图标" v-model="form.icon"/>-->
+  <a-modal :visible="visible" width="50%" ok-text="确认" cancel-text="取消" @ok="submit" @cancel="closeForm"
+           :destroy-on-close="true">
+    <c-icon-select :visible="show.extend" @closeExtend="closeExtend" title="选择图标" v-model="form.icon"/>
     <a-form-model :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" ref="ruleForm">
       <a-form-model-item label="ID" style="display: none">
         <a-input v-model="form.id" disabled placeholder="新建时自动生成"/>
@@ -112,6 +113,12 @@ export default {
   mounted() {
   },
   methods: {
+    closeForm() {
+      this.form = {}
+      this.show.add = false
+      this.show.edit = false
+      this.$emit('close')
+    },
     checkStartChar(rule, value, callback) {
       if (!value.startsWith("/")) {
         callback(new Error('必须以/开头'))
