@@ -1,6 +1,5 @@
 package cn.crabapples.system.websocket;
 
-import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.websocket.EndPointConfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * TODO WebSocket连接端点
+ * TODO WebSocket连接端点(简单连接)
  * 第一种方式：使用@ServerEndpoint注解定义的WebSocket服务端点
  *
  * @author Ms.He
@@ -25,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Component
 @ServerEndpoint(value = "/websocket/{id}", configurator = EndPointConfigure.class)
-public class WebSocketServer {
+public class WebSocketServerSimple {
 
 
     public static final ConcurrentHashMap<String, Session> WEB_SOCKET_CLIENT = new ConcurrentHashMap<>(16);
@@ -44,7 +43,7 @@ public class WebSocketServer {
 //        attributes.put("userId", userId);
 //        attributes.put("username", username);
         log.info("WebSocket连接成功,客户端ID:[{}],当前连接数量:[{}]", id, WEB_SOCKET_CLIENT.size());
-        SocketMessageSender.sendMessage("连接成功", id);
+        SocketMessageSender.sendMessageSimple("连接成功", id);
     }
 
     /**
@@ -68,7 +67,7 @@ public class WebSocketServer {
     public void onMessage(Session session, String message, @PathParam("id") String id) throws IOException {
         String format = MessageFormat.format("收到来自客户端[{0}]消息:[{1}]", id, message);
         log.info(format);
-        SocketMessageSender.sendMessage(format, id);
+        SocketMessageSender.sendMessageSimple(format, id);
 
     }
 

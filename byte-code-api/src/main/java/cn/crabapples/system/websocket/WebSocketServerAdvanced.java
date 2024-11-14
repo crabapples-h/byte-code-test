@@ -6,13 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import javax.websocket.Session;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * TODO WebSocket连接端点
+ * TODO WebSocket连接端点(高级连接)
  * 第二种方式:注册WebSocketHandler
  *
  * @author Ms.He
@@ -22,11 +20,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * pc-name mshe
  */
 @Configuration
-public class WebSocketServer2 implements WebSocketConfigurer {
+public class WebSocketServerAdvanced implements WebSocketConfigurer {
     private final AuthHandshakeInterceptor authHandshakeInterceptor;
     public static final ConcurrentHashMap<String, WebSocketSession> WEB_SOCKET_CLIENT = new ConcurrentHashMap<>(16);
 
-    public WebSocketServer2(AuthHandshakeInterceptor authHandshakeInterceptor) {
+    public WebSocketServerAdvanced(AuthHandshakeInterceptor authHandshakeInterceptor) {
         this.authHandshakeInterceptor = authHandshakeInterceptor;
     }
 
@@ -51,7 +49,7 @@ public class WebSocketServer2 implements WebSocketConfigurer {
         public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
             // 处理 WebSocket 消息
             String clientId = (String) session.getAttributes().get("clientId");
-            SocketMessageSender.sendMessage2(message, clientId);
+            SocketMessageSender.sendMessageAdvanced(message, clientId);
 //            session.sendMessage(new TextMessage("Hello, " + session.getAttributes().get("user")));
         }
 

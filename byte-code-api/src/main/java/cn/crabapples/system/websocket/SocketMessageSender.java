@@ -1,15 +1,15 @@
 package cn.crabapples.system.websocket;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import javax.websocket.Session;
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * TODO WebSocketService
+ * TODO WebSocket消息发送服务
  *
  * @author Mr.He
  * 2019/8/5 22:53
@@ -19,16 +19,32 @@ import java.io.IOException;
  */
 @Slf4j
 public class SocketMessageSender {
-    public static void sendMessage(String message, String id) throws IOException {
-        Session session = WebSocketServer.WEB_SOCKET_CLIENT.get(id);
+    public static void sendMessageAllSimple(String message, String id) throws IOException {
+        ConcurrentHashMap.KeySetView<String, Session> keys = WebSocketServerSimple.WEB_SOCKET_CLIENT.keySet();
+        for (String key : keys) {
+            Session session = WebSocketServerSimple.WEB_SOCKET_CLIENT.get(key);
+            session.getBasicRemote().sendText(message);
+        }
+    }
+
+    public static void sendMessageSimple(String message, String id) throws IOException {
+        Session session = WebSocketServerSimple.WEB_SOCKET_CLIENT.get(id);
         if (session == null) {
             return;
         }
         session.getBasicRemote().sendText(message);
     }
 
-    public static void sendMessage2(WebSocketMessage<?> message, String id) throws IOException {
-        WebSocketSession session = WebSocketServer2.WEB_SOCKET_CLIENT.get(id);
+    public static void sendMessageAllAdvanced(WebSocketMessage<?> message, String id) throws IOException {
+        ConcurrentHashMap.KeySetView<String, WebSocketSession> keys = WebSocketServerAdvanced.WEB_SOCKET_CLIENT.keySet();
+        for (String key : keys) {
+            WebSocketSession session = WebSocketServerAdvanced.WEB_SOCKET_CLIENT.get(key);
+            session.sendMessage(message);
+        }
+    }
+
+    public static void sendMessageAdvanced(WebSocketMessage<?> message, String id) throws IOException {
+        WebSocketSession session = WebSocketServerAdvanced.WEB_SOCKET_CLIENT.get(id);
         if (session == null) {
             return;
         }
