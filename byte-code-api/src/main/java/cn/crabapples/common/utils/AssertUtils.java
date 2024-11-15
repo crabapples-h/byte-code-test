@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public abstract class AssertUtils {
     /**
-     * 断言为null
+     * 断言为null,不为Null时报错
      *
      * @param object  需要断言判断的对象
      * @param message 断言失败提示
@@ -19,7 +19,7 @@ public abstract class AssertUtils {
     }
 
     /**
-     * 断言不为null
+     * 断言不为null,为Null时报错
      *
      * @param object  需要断言判断的对象
      * @param message 断言失败提示

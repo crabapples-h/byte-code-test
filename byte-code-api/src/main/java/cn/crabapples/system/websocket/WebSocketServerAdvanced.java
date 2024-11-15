@@ -30,7 +30,7 @@ public class WebSocketServerAdvanced implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new WebSocketHandlerImpl(), "/ws/*")
+        registry.addHandler(new WebSocketHandlerImpl(), "/ws/v2/*")
                 .addInterceptors(authHandshakeInterceptor) // 添加自定义拦截器
                 .setAllowedOrigins("*"); // 允许的跨域来源
     }

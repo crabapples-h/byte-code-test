@@ -1,5 +1,6 @@
 package cn.crabapples.system.websocket;
 
+import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.websocket.EndPointConfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -23,13 +24,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Slf4j
 @Component
-@ServerEndpoint(value = "/websocket/{id}", configurator = EndPointConfigure.class)
+@ServerEndpoint(value = "/ws/v1/{id}", configurator = EndPointConfigure.class)
 public class WebSocketServerSimple {
 
-
     public static final ConcurrentHashMap<String, Session> WEB_SOCKET_CLIENT = new ConcurrentHashMap<>(16);
-
-
 
     /**
      * 连接建立成功调用的方法

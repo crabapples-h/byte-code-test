@@ -1,7 +1,8 @@
 <template>
   <div>
     <a-space>
-      <a-button type="primary" @click="connect" :disabled="disable">开始连接</a-button>
+      <a-button type="primary" @click="connect(url.connectV1)" :disabled="disable">开始连接V1</a-button>
+      <a-button type="primary" @click="connect(url.connectV2)" :disabled="disable">开始连接V2</a-button>
     </a-space>
     <p v-for="item in messages">{{ item }}</p>
   </div>
@@ -17,7 +18,8 @@ export default {
   data() {
     return {
       url: {
-        connect: '/websocket',
+        connectV1: '/ws/v1',
+        connectV2: '/ws/v2',
       },
       clientId: '',
       disable: false,
@@ -27,15 +29,14 @@ export default {
     }
   },
   methods: {
-    connect() {
+    connect(prefixUrl) {
       this.clientId = Math.floor(Math.random() * 10000000).toString()
-      let url = `${this.url.connect}/${this.clientId}`;
+      let url = `${prefixUrl}/${this.clientId}`;
       console.log("url", url);
-const token = this.$store.getters.TOKEN
-      this.server = new WebSocket(url);
-      // this.server = new WebSocket(url, [this.$store.getters.TOKEN]);
+      const token = this.$store.getters.TOKEN
+      // this.server = new WebSocket(url);
+      this.server = new WebSocket(url, [this.$store.getters.TOKEN]);
       this.server.onopen = (event) => {
-        this.server.send(JSON.stringify({type: "token", token}));
         console.log("连接成功", event)
         this.startTimer()
       }

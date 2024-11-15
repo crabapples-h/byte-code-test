@@ -3,10 +3,13 @@ package cn.crabapples.common.config;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.aspectj.lang.reflect.SourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -20,15 +23,23 @@ import java.util.Arrays;
  * qq 294046317
  * pc-name 29404
  */
+//@Aspect
+//@Component
+//@Order(50)
 public class AopLog {
     private static final Logger logger = LoggerFactory.getLogger(AopLog.class);
+    private static final String CONTROLLER_AOP = "execution(* cn.crabapples.system.controller.*.*(..))";
+
+    @Pointcut(CONTROLLER_AOP)
+    public void controllerAop() {
+    }
 
     public AopLog() {
         logger.info("注入日志切面:[{}]", "AopConfigure");
     }
 
 
-     /**
+    /**
      * Object[] getArgs()：返回此切点处（目标方法）的参数
      * Signature getSignature()：返回切点处的签名。
      * Object getTarget()：返回目标对象
@@ -39,6 +50,7 @@ public class AopLog {
      * String toShortString()：返回切点的缩写字符串表示形式。
      * String getKind()：返回表示切点类型的字符串
      */
+    @Before("controllerAop()")
     public void before(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         Signature signature = joinPoint.getSignature();
@@ -60,6 +72,7 @@ public class AopLog {
         System.out.println("\tshortString=" + shortString);
     }
 
+    @After("controllerAop()")
     public void after(JoinPoint joinPoint) {
         System.out.println("【后置通知】");
         System.out.println("\tkind=" + joinPoint.getKind());
@@ -74,6 +87,7 @@ public class AopLog {
      * @param joinPoint ：提供对连接点处可用状态和有关它的静态信息的反射访问
      * @param result    ：目标方法返回的值，参数名称与 returning 属性值一致。无返回值时，这里 result 会为 null.
      */
+    @AfterReturning("controllerAop()")
     public void afterReturning(JoinPoint joinPoint, Object result) {
         System.out.println("【返回通知】");
         System.out.println("\t目标方法返回值=" + result);
@@ -87,6 +101,7 @@ public class AopLog {
      *
      * @param ex：捕获的异常对象，名称与 throwing 属性值一致
      */
+    @AfterThrowing(value = "controllerAop()", throwing = "ex")
     public void afterThrowing(JoinPoint jp, Exception ex) {
         String methodName = jp.getSignature().getName();
         System.out.println("【异常通知】");
@@ -97,6 +112,7 @@ public class AopLog {
         }
     }
 
+    @Around("controllerAop()")
     public Object around(ProceedingJoinPoint join) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) join.getSignature();
         Method method = methodSignature.getMethod();
