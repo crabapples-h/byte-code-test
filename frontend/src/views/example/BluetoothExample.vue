@@ -27,6 +27,7 @@ export default {
       timer: null,
       connected: null,
       server: null,
+      service: null,
       device: null,
       // uuid:'0000180c-0000-1000-8000-00805f9b34fb',
       wave: {
@@ -98,17 +99,7 @@ export default {
       if (val) {
         console.log("设备已连接")
         this.$message.success('设备已连接')
-        console.log('Device Name: ', this.device.name);
-        console.log('Device Id: ', this.device.id);
-        const services = this.server.getPrimaryServices()
-        services.then(services => {
-          services.forEach(service => {
-            console.log("服务UUID:", service.uuid)
-            this.sendData(service.uuid)
-          })
-        }).catch(error => {
-          console.error('Error: ' + error);
-        })
+        this.sendData(this.serviceId)
       } else {
         console.log("设备断开连接")
         this.$message.warn('设备断开连接')
@@ -133,24 +124,17 @@ export default {
       }
       return array;
     },
-    sendData(serviceUuid) {
+    sendData() {
       // let currentIndex = count % coyote3wave[selectedOption].length
-      let valueA = 'B0000000' + this.coyote3wave['a'][currentIndex] + coyote3wave[selectedOption][currentIndex]
+      let valueA = 'B0000000' + this.wave['a'][currentIndex] + wave['a'][currentIndex]
       // let characteristicIdA = '0000150a-0000-1000-8000-00805f9b34fb' // 3.0设备蓝牙特性的波形写入 UUID (AB通道相同)
       console.log('开始发送数据');
-      this.server.getPrimaryService(serviceUuid).then(service => {
-        // 获取特性A
-        service.getCharacteristics().then(channels => {
-          let channelUUID = channels[0].uuid;
-          service.getCharacteristic(channelUUID).then(channel => {
-            setInterval(() => {
-              channel.writeValue(this.hexStringToUint8Array(valueA));
-            }, 500)
-          })
-        })
-      }).catch(error => {
-        console.log('error', error)
-      });
+      const channel = this.service.getCharacteristic(this.channelId)
+      channel.then(channel => {
+        setInterval(() => {
+          channel.writeValue(this.hexStringToUint8Array(valueA));
+        }, 500)
+      })
     },
     scanDevice() {
       console.clear()

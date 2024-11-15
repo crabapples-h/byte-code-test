@@ -1,4 +1,4 @@
-package cn.crabapples.common.utils.security;
+package cn.crabapples.common.utils;
 
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;

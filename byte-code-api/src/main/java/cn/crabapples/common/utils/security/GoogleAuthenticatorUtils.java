@@ -1,9 +1,7 @@
 package cn.crabapples.common.utils.security;
 
+import cn.crabapples.common.utils.QRCodeUtils;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.apache.commons.codec.binary.Base32;
 
 import javax.crypto.Mac;
