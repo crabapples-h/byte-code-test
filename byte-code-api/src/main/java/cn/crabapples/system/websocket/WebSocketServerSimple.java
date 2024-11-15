@@ -1,6 +1,5 @@
 package cn.crabapples.system.websocket;
 
-import cn.crabapples.common.jwt.JwtTokenUtils;
 import cn.crabapples.common.websocket.EndPointConfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

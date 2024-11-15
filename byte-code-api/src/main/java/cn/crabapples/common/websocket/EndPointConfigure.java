@@ -45,7 +45,7 @@ public class EndPointConfigure extends ServerEndpointConfig.Configurator {
             response.getHeaders().put("Sec-WebSocket-Protocol", Collections.singletonList(token));
         }
         //...可以验证码头信息的合法性或者直接存储到用户配置里面
-        sec.getUserProperties().put("token", "6666666");
+//        sec.getUserProperties().put("token", "6666666");
         super.modifyHandshake(sec, request, response);
     }
 }

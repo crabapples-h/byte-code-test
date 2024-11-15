@@ -54,6 +54,7 @@ public class AuthHandshakeInterceptor implements HandshakeInterceptor {
             if (null != token) {
                 // Token 验证通过，可以将用户信息添加到 WebSocket session attributes 中
                 try {
+                    jwtTokenUtils.valid(token);
                     String userId = jwtTokenUtils.getUserId(token);
                     String username = jwtTokenUtils.getUserName(token);
                     attributes.put("clientId", clientId);
